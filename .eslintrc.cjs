@@ -1,3 +1,8 @@
+const tsConfiguration =
+	process.env.ESLINT_FAST === 'true'
+		? 'plugin:@typescript-eslint/recommended'
+		: 'plugin:@typescript-eslint/recommended-type-checked';
+
 module.exports = {
 	extends: [
 		'eslint:recommended',
@@ -7,7 +12,11 @@ module.exports = {
 		'plugin:react/recommended',
 		'plugin:react-hooks/recommended',
 		'plugin:jsx-a11y/recommended',
-		'plugin:react/jsx-runtime'
+		'plugin:react/jsx-runtime',
+		'plugin:vitest/recommended',
+		'plugin:testing-library/dom',
+		'plugin:jest-dom/recommended',
+		'plugin:testing-library/react'
 	],
 	parserOptions: {
 		ecmaVersion: 2022,
@@ -33,10 +42,10 @@ module.exports = {
 		{
 			files: ['**/*.{ts,tsx,mts,cts}'],
 			parser: '@typescript-eslint/parser',
-			extends: [
-				'plugin:@typescript-eslint/recommended',
-				'plugin:import/typescript'
-			],
+			parserOptions: {
+				project: true
+			},
+			extends: [tsConfiguration, 'plugin:import/typescript'],
 			settings: {
 				'import/resolver': {
 					typescript: {}
