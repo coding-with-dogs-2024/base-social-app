@@ -1,7 +1,7 @@
 import classes from './PostFeed.module.scss';
 import { useGetAllPosts } from '../../../services/jsonapi/api';
 import { CircleSpinner } from '../../UI/Spinner/Circle';
-import { PostCard } from './PostCard';
+import { PostCard } from '../../PostCard';
 import { useEffect, useMemo } from 'react';
 import { usePagination } from '../../UI/Pagination/usePagination';
 import type { Post } from '../../../services/jsonapi/types';
