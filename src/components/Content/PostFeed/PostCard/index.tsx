@@ -9,7 +9,11 @@ type Props = Readonly<{
 export const PostCard = (props: Props) => {
 	return (
 		<Card
-			title={<div className={classes.title}>{props.post.title}</div>}
+			title={
+				<div className={classes.title}>
+					{props.post.id} - {props.post.title}
+				</div>
+			}
 			body={<div>{props.post.body}</div>}
 		/>
 	);
