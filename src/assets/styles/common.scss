@@ -11,6 +11,15 @@
 @mixin link {
   text-decoration: none;
   cursor: pointer;
+  padding: 0.5rem;
+
+  @include border-radius;
+
+  &:hover {
+    border-style: solid;
+    border-width: 0.1rem;
+    padding: 0.4rem;
+  }
 }
 
 @mixin link-bg-primary {
