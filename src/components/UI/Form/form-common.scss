@@ -1,0 +1,18 @@
+@mixin wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0.5rem;
+}
+
+@mixin label {
+  margin-left: 0.25rem;
+  font-weight: bold;
+}
+
+@mixin input-common {
+  border: 1px solid lightgray;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  padding: 0.25rem;
+}
