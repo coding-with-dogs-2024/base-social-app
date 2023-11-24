@@ -26,7 +26,6 @@ export const UserProfile = () => {
 		<div className={classes.userProfile}>
 			<div className={classes.profileTitle}>
 				<h1>User Profile</h1>
-				{userData && <h2>{userData.name}</h2>}
 			</div>
 			{isLoading && <CircleSpinner />}
 			<div className={classes.profileContent}>
