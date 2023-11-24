@@ -1,19 +1,10 @@
 import { useImmer } from 'use-immer';
 import { useCallback } from 'react';
+import type { UsePaginationReturn } from './types';
 
-export type PaginationState = Readonly<{
+type PaginationState = Readonly<{
 	currentPage: number;
 	totalPages: number;
-}>;
-
-export type UsePaginationReturn<T> = Readonly<{
-	paginationState: PaginationState;
-	showPreviousPage: boolean;
-	showNextPage: boolean;
-	previousPage: () => void;
-	nextPage: () => void;
-	updatePagination: (posts: ReadonlyArray<T>) => void;
-	extractPage: (posts: ReadonlyArray<T>) => ReadonlyArray<T>;
 }>;
 
 const previousPageAllowed = (state: PaginationState): boolean =>
@@ -66,12 +57,13 @@ export const usePagination = <T>(pageSize: number): UsePaginationReturn<T> => {
 	);
 
 	return {
-		paginationState: state,
-		showPreviousPage: state.currentPage !== 0,
-		showNextPage: state.currentPage < state.totalPages - 1,
-		previousPage,
-		nextPage,
 		updatePagination,
-		extractPage
+		extractPage,
+		componentProps: {
+			showPreviousPage: state.currentPage !== 0,
+			showNextPage: state.currentPage < state.totalPages - 1,
+			previousPage,
+			nextPage
+		}
 	};
 };
