@@ -1,15 +1,21 @@
+@import "../../../../assets/styles/common";
+
 .post-title {
   font-weight: bold;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
-  >*:nth-child(1) {
+  .post-title-content {
     width: 60%;
   }
 
-  >*:nth-child(2) {
+  .post-title-user {
     width: 40%;
     text-align: right;
+
+    a {
+      @include link-bg-default;
+    }
   }
 }

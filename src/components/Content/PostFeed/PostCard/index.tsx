@@ -13,10 +13,10 @@ const PostTitle = (props: Props) => {
 	const { isLoading, data } = useGetUserById(props.post.userId);
 	return (
 		<div className={classes.postTitle}>
-			<div>
+			<div className={classes.postTitleContent}>
 				{props.post.id} - {props.post.title}
 			</div>
-			<div>
+			<div className={classes.postTitleUser}>
 				{isLoading && <EllipsisSpinner />}
 				<Link to={`/user/${props.post.userId}`}>
 					{data && data.name}
