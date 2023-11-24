@@ -6,7 +6,7 @@ import { EllipsisSpinner } from '../UI/Spinner/Ellipsis';
 import { Link } from 'react-router-dom';
 import { useImmer } from 'use-immer';
 import { Button } from '../UI/Button';
-import { CommentList } from './CommentList';
+import { PostComments } from './PostComments';
 
 type Props = Readonly<{
 	post: Post;
@@ -52,7 +52,7 @@ const PostBody = (props: Props) => {
 					{`${commentsPrefix} Comments`}
 				</Button>
 			</div>
-			{state.showComments && <CommentList postId={props.post.id} />}
+			{state.showComments && <PostComments postId={props.post.id} />}
 		</div>
 	);
 };
