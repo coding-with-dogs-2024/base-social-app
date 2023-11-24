@@ -2,8 +2,9 @@ import type { CommentList, Post, PostList, User } from './types';
 import { commentListSchema, postListSchema, userSchema } from './types';
 import { useQuery } from '@tanstack/react-query';
 import type { UseQueryResult, DefaultError } from '@tanstack/react-query';
+import axios from 'axios';
 
-const HOST = 'https://jsonplaceholder.typicode.com';
+export const HOST = 'https://jsonplaceholder.typicode.com';
 const GET_ALL_POSTS = 'GET_ALL_POSTS';
 const GET_USER_BY_ID = 'GET_USER_BY_ID';
 const GET_ALL_POSTS_FOR_USER = 'GET_ALL_POSTS_FOR_USER';
@@ -24,15 +25,18 @@ const reOrderPosts = (posts: PostList): PostList => {
 	return group1.concat(group2).concat(group3);
 };
 
-export const useGetAllPosts = (): UseQueryResult<ReadonlyArray<Post>> =>
+export const useGetAllPosts = (): Pick<
+	UseQueryResult<ReadonlyArray<Post>>,
+	'isLoading' | 'data'
+> =>
 	useQuery<PostList>({
 		queryKey: [GET_ALL_POSTS],
 		queryFn: ({ signal }) =>
-			fetch(`${HOST}/posts`, {
-				signal
-			})
-				.then((res) => res.json())
-				.then(postListSchema.parse)
+			axios
+				.get(`${HOST}/posts`, {
+					signal
+				})
+				.then((res) => postListSchema.parse(res.data))
 				.then(reOrderPosts)
 	});
 
@@ -41,11 +45,11 @@ export const useGetUserById = (userId: number): UseQueryResult<User> =>
 	useQuery<User, DefaultError, User, GetUserByIdQueryKey>({
 		queryKey: [GET_USER_BY_ID, userId],
 		queryFn: ({ signal, queryKey: [, userIdParam] }) =>
-			fetch(`${HOST}/users/${userIdParam}`, {
-				signal
-			})
-				.then((res) => res.json())
-				.then(userSchema.parse),
+			axios
+				.get(`${HOST}/users/${userIdParam}`, {
+					signal
+				})
+				.then((res) => userSchema.parse(res.data)),
 		enabled: userId > 0
 	});
 
@@ -56,24 +60,24 @@ export const useGetAllPostsForUser = (
 	useQuery<PostList, DefaultError, PostList, GetAllPostsForUserKey>({
 		queryKey: [GET_ALL_POSTS_FOR_USER, userId],
 		queryFn: ({ signal, queryKey: [, userIdParam] }) =>
-			fetch(`${HOST}/posts?userId=${userIdParam}`, {
-				signal
-			})
-				.then((res) => res.json())
-				.then(postListSchema.parse)
+			axios
+				.get(`${HOST}/posts?userId=${userIdParam}`, {
+					signal
+				})
+				.then((res) => postListSchema.parse(res.data))
 	});
 
 type GetAllCommentsForPostKey = [typeof GET_ALL_COMMENTS_FOR_POST, number];
 export const useGetAllCommentsForPost = (
 	postId: number
-): UseQueryResult<CommentList> =>
+): Pick<UseQueryResult<CommentList>, 'isLoading' | 'data'> =>
 	useQuery<CommentList, DefaultError, CommentList, GetAllCommentsForPostKey>({
 		queryKey: [GET_ALL_COMMENTS_FOR_POST, postId],
 		queryFn: ({ signal, queryKey: [, postIdParam] }) =>
-			fetch(`${HOST}/posts/${postIdParam}/comments`, {
-				signal
-			})
-				.then((res) => res.json())
-				.then(commentListSchema.parse),
+			axios
+				.get(`${HOST}/posts/${postIdParam}/comments`, {
+					signal
+				})
+				.then((res) => commentListSchema.parse(res.data)),
 		enabled: postId > 0
 	});
