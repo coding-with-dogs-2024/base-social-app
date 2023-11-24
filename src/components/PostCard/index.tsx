@@ -1,8 +1,8 @@
-import type { Post } from '../../../services/jsonapi/types';
-import { Card } from '../../UI/Card';
+import type { Post } from '../../services/jsonapi/types';
+import { Card } from '../UI/Card';
 import classes from './PostCard.module.scss';
-import { useGetUserById } from '../../../services/jsonapi/api';
-import { EllipsisSpinner } from '../../UI/Spinner/Ellipsis';
+import { useGetUserById } from '../../services/jsonapi/api';
+import { EllipsisSpinner } from '../UI/Spinner/Ellipsis';
 import { Link } from 'react-router-dom';
 
 type Props = Readonly<{

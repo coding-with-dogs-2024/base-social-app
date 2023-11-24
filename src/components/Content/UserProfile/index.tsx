@@ -7,7 +7,7 @@ import {
 import { useMemo } from 'react';
 import { CircleSpinner } from '../../UI/Spinner/Circle';
 import { UserInfo } from './UserInfo';
-import { PostCard } from '../../Cards/PostCard';
+import { PostCard } from '../../PostCard';
 
 type Params = Readonly<{
 	id: string;
