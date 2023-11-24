@@ -12,9 +12,13 @@ export const GET_USER_BY_ID = 'GET_USER_BY_ID';
  * an order. This mixes them up to make things look more natural.
  */
 const reOrderPosts = (posts: PostList): PostList => {
-	const group1 = posts.filter((post, index) => index % 3 === 0);
-	const group2 = posts.filter((post, index) => index % 3 === 1);
-	const group3 = posts.filter((post, index) => index % 3 === 2);
+	const filterGroup =
+		(groupNumber: number) =>
+		(p: Post, index: number): boolean =>
+			index % 3 === groupNumber;
+	const group1 = posts.filter(filterGroup(0));
+	const group2 = posts.filter(filterGroup(1));
+	const group3 = posts.filter(filterGroup(2));
 	return group1.concat(group2).concat(group3);
 };
 
