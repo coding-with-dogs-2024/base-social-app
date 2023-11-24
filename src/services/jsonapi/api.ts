@@ -1,5 +1,5 @@
-import type { Post, PostList, User } from './types';
-import { postListSchema, userSchema } from './types';
+import type { CommentList, Post, PostList, User } from './types';
+import { commentListSchema, postListSchema, userSchema } from './types';
 import { useQuery } from '@tanstack/react-query';
 import type { UseQueryResult, DefaultError } from '@tanstack/react-query';
 
@@ -7,6 +7,7 @@ const HOST = 'https://jsonplaceholder.typicode.com';
 const GET_ALL_POSTS = 'GET_ALL_POSTS';
 const GET_USER_BY_ID = 'GET_USER_BY_ID';
 const GET_ALL_POSTS_FOR_USER = 'GET_ALL_POSTS_FOR_USER';
+const GET_ALL_COMMENTS_FOR_POST = 'GET_ALL_COMMENTS_FOR_POST';
 
 /**
  * The JSON Placeholder API returns the posts in too elegant of
@@ -60,4 +61,19 @@ export const useGetAllPostsForUser = (
 			})
 				.then((res) => res.json())
 				.then(postListSchema.parse)
+	});
+
+type GetAllCommentsForPostKey = [typeof GET_ALL_COMMENTS_FOR_POST, number];
+export const useGetAllCommentsForPost = (
+	postId: number
+): UseQueryResult<CommentList> =>
+	useQuery<CommentList, DefaultError, CommentList, GetAllCommentsForPostKey>({
+		queryKey: [GET_ALL_COMMENTS_FOR_POST, postId],
+		queryFn: ({ signal, queryKey: [, postIdParam] }) =>
+			fetch(`${HOST}/posts/${postIdParam}/comments`, {
+				signal
+			})
+				.then((res) => res.json)
+				.then(commentListSchema.parse),
+		enabled: postId > 0
 	});
