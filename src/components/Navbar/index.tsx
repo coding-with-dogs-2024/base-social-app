@@ -2,6 +2,6 @@ import classes from './Navbar.module.scss';
 
 export const Navbar = () => (
 	<header className={classes.navbar}>
-		<p>My Social App</p>
+		<h1 className={classes.title}>My Social App</h1>
 	</header>
 );
