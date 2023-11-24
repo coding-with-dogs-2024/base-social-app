@@ -1,11 +1,13 @@
 @import "../../assets/styles/variables";
+@import "../../assets/styles/shadow";
 
 .navbar {
   background-color: $color-primary;
   display: flex;
   justify-content: center;
   padding: 1rem;
-  box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
+
+  @include box-shadow;
 
   .title {
     margin: 0;
