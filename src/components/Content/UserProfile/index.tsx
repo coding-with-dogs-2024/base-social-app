@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { useGetUserById } from '../../../services/jsonapi/api';
 import { useMemo } from 'react';
 import { CircleSpinner } from '../../UI/Spinner/Circle';
+import { UserInfo } from './UserInfo';
 
 type Params = Readonly<{
 	id: string;
@@ -28,6 +29,9 @@ export const UserProfile = () => {
 				{data && <h2>{data.name}</h2>}
 			</div>
 			{isLoading && <CircleSpinner />}
+			<div className={classes.profileContent}>
+				{data && <UserInfo user={data} />}
+			</div>
 		</div>
 	);
 };
