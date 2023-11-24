@@ -56,8 +56,8 @@ export const usePagination = <T>(pageSize: number): UsePaginationReturn<T> => {
 		updatePagination,
 		extractPage,
 		componentProps: {
-			showPreviousPage: state.currentPage !== 0,
-			showNextPage: state.currentPage < state.totalPages - 1,
+			showPreviousPage: previousPageAllowed(state),
+			showNextPage: nextPageAllowed(state),
 			previousPage,
 			nextPage
 		}
