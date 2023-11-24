@@ -1,4 +1,11 @@
+@import "../../../assets/styles/shadow";
+
 .card {
   display: flex;
   flex-direction: column;
+  padding: 1rem;
+  width: 100%;
+  border-radius: 0.25rem;
+
+  @include box-shadow;
 }
