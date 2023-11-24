@@ -1,7 +1,13 @@
 module.exports = {
     extends: [
         'eslint:recommended',
-        'plugin:prettier/recommended'
+        'plugin:prettier/recommended',
+        'plugin:import/recommended',
+        'plugin:@tanstack/eslint-plugin-query/recommended',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:jsx-a11y/recommended',
+        'plugin:react/jsx-runtime'
     ],
     parserOptions: {
         ecmaVersion: 2022,
@@ -23,8 +29,14 @@ module.exports = {
             files: ['**/*.{ts,tsx,mts,cts}'],
             parser: '@typescript-eslint/parser',
             extends: [
-                'plugin:@typescript-eslint/recommended'
-            ]
+                'plugin:@typescript-eslint/recommended',
+                'plugin:import/typescript'
+            ],
+            settings: {
+                'import/resolver': {
+                    typescript: {}
+                }
+            }
         }
     ]
 }
