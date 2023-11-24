@@ -1,3 +1,5 @@
+@import "../../../styles/variables";
+
 .lds-roller {
   display: inline-block;
   position: relative;
@@ -17,7 +19,7 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #fff;
+  background: $color-secondary;
   margin: -4px 0 0 -4px;
 }
 
