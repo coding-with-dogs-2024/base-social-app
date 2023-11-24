@@ -1,9 +1,10 @@
 import { Navbar } from './Navbar';
 import { Content } from './Content';
+import { BrowserRouter } from 'react-router-dom';
 
 export const App = () => (
-	<div>
+	<BrowserRouter>
 		<Navbar />
 		<Content />
-	</div>
+	</BrowserRouter>
 );
