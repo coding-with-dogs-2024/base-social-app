@@ -14,11 +14,15 @@ type Props = Readonly<{
 
 const boundClassNames = classnames.bind(classes);
 
-export const Button = (props: Props) => {
+export const Button = ({
+	color = 'default',
+	size = 'default',
+	...props
+}: Props) => {
 	const buttonClassNames = boundClassNames({
 		button: true,
-		[`color-${props.color ?? 'default'}`]: true,
-		[`size-${props.size ?? 'default'}`]: true
+		[`color-${color}`]: true,
+		[`size-${size}`]: true
 	});
 	return (
 		<button className={buttonClassNames} onClick={props.onClick}>
