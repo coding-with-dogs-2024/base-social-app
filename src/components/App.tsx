@@ -1,3 +1,9 @@
 import { Navbar } from './Navbar';
+import { Content } from './Content';
 
-export const App = () => <Navbar />;
+export const App = () => (
+	<div>
+		<Navbar />
+		<Content />
+	</div>
+);

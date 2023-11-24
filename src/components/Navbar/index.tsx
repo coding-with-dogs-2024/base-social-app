@@ -1,3 +1,3 @@
 import classes from './Navbar.module.scss';
 
-export const Navbar = () => <div className={classes.navbar}></div>;
+export const Navbar = () => <header className={classes.navbar}></header>;
