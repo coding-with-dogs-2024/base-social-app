@@ -1,16 +1,35 @@
+import classes from './PostComments.module.scss';
 import { useGetAllCommentsForPost } from '../../../services/jsonapi/api';
 import { EllipsisSpinner } from '../../UI/Spinner/Ellipsis';
+import type { Comment as CommentType } from '../../../services/jsonapi/types';
 
-type Props = Readonly<{
+type PostCommentsProps = Readonly<{
 	postId: number;
 }>;
 
-export const PostComments = (props: Props) => {
-	const { isLoading } = useGetAllCommentsForPost(props.postId);
-	return (
+type CommentProps = Readonly<{
+	comment: CommentType;
+}>;
+
+const Comment = (props: CommentProps) => (
+	<div className={classes.comment}>
 		<div>
+			<strong>{props.comment.email}</strong>
+		</div>
+		<div>{props.comment.body}</div>
+	</div>
+);
+
+export const PostComments = (props: PostCommentsProps) => {
+	const { isLoading, data } = useGetAllCommentsForPost(props.postId);
+	return (
+		<div className={classes.postComments}>
 			{isLoading && <EllipsisSpinner />}
-			{!isLoading && <div>All Comments</div>}
+			{!isLoading &&
+				data &&
+				data.map((comment) => (
+					<Comment key={comment.id} comment={comment} />
+				))}
 		</div>
 	);
 };

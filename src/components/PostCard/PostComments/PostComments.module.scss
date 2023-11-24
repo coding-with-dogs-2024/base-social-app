@@ -1,0 +1,8 @@
+.post-comments {
+  display: flex;
+  flex-direction: column;
+
+  .comment {
+    margin: 0.5rem 0;
+  }
+}
