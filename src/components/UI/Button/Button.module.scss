@@ -1,23 +1,37 @@
+@use "sass:color";
 @import "../../../assets/styles/variables";
 @import "../../../assets/styles/common";
 
 .button {
   all: unset;
   padding: 1rem;
+  cursor: pointer;
 
   @include border-radius;
   @include box-shadow;
 
   &.primary {
     background-color: $color-primary;
+
+    &:hover {
+      background-color: color.adjust($color-primary, $lightness: -10%);
+    }
   }
 
   &.secondary {
     background-color: $color-secondary;
+
+    &:hover {
+      background-color: color.adjust($color-secondary, $lightness: -10%);
+    }
   }
 
   &.default {
     background-color: white;
     border: 1px lightgray solid;
+
+    &:hover {
+      background-color: color.adjust(white, $lightness: -10%);
+    }
   }
 }
