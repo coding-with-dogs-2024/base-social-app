@@ -4,6 +4,7 @@ import classes from './PostCard.module.scss';
 import { useGetUserById } from '../../services/jsonapi/api';
 import { EllipsisSpinner } from '../UI/Spinner/Ellipsis';
 import { Link } from 'react-router-dom';
+import { useImmer } from 'use-immer';
 
 type Props = Readonly<{
 	post: Post;
@@ -26,9 +27,29 @@ const PostTitle = (props: Props) => {
 	);
 };
 
+type PostBodyState = Readonly<{
+	showComments: boolean;
+}>;
+
+const PostBody = (props: Props) => {
+	const [state, setState] = useImmer<PostBodyState>({
+		showComments: false
+	});
+	const toggleShowComments = () =>
+		setState((draft) => {
+			draft.showComments = !draft.showComments;
+		});
+
+	return (
+		<div>
+			<div>{props.post.body}</div>
+		</div>
+	);
+};
+
 export const PostCard = (props: Props) => (
 	<Card
 		title={<PostTitle post={props.post} />}
-		body={<div>{props.post.body}</div>}
+		body={<PostBody post={props.post} />}
 	/>
 );
