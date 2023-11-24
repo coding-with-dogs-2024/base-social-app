@@ -6,6 +6,7 @@ import { EllipsisSpinner } from '../UI/Spinner/Ellipsis';
 import { Link } from 'react-router-dom';
 import { useImmer } from 'use-immer';
 import { Button } from '../UI/Button';
+import { CommentList } from './CommentList';
 
 type Props = Readonly<{
 	post: Post;
@@ -41,14 +42,17 @@ const PostBody = (props: Props) => {
 			draft.showComments = !draft.showComments;
 		});
 
+	const commentsPrefix = state.showComments ? 'Hide' : 'Show';
+
 	return (
 		<div className={classes.postBody}>
 			<div>{props.post.body}</div>
 			<div className={classes.commentButtonWrapper}>
 				<Button size="small" onClick={toggleShowComments}>
-					Comments
+					{`${commentsPrefix} Comments`}
 				</Button>
 			</div>
+			{state.showComments && <CommentList />}
 		</div>
 	);
 };
