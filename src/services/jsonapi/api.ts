@@ -7,6 +7,17 @@ const HOST = 'https://jsonplaceholder.typicode.com';
 export const GET_ALL_POSTS = 'GET_ALL_POSTS';
 export const GET_USER_BY_ID = 'GET_USER_BY_ID';
 
+/**
+ * The JSON Placeholder API returns the posts in too elegant of
+ * an order. This mixes them up to make things look more natural.
+ */
+const reOrderPosts = (posts: PostList): PostList => {
+	const group1 = posts.filter((post, index) => index % 3 === 0);
+	const group2 = posts.filter((post, index) => index % 3 === 1);
+	const group3 = posts.filter((post, index) => index % 3 === 2);
+	return group1.concat(group2).concat(group3);
+};
+
 export const useGetAllPosts = (): UseQueryResult<ReadonlyArray<Post>> =>
 	useQuery<PostList>({
 		queryKey: [GET_ALL_POSTS],
@@ -16,6 +27,7 @@ export const useGetAllPosts = (): UseQueryResult<ReadonlyArray<Post>> =>
 			})
 				.then((res) => res.json())
 				.then(postListSchema.parse)
+				.then(reOrderPosts)
 	});
 
 type GetUserByIdQueryKey = [typeof GET_USER_BY_ID, number];
