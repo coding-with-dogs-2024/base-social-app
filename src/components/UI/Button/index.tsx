@@ -13,11 +13,12 @@ type Props = Readonly<{
 const boundClassNames = classnames.bind(classes);
 
 export const Button = (props: Props) => {
-	boundClassNames({
-		button: true
+	const buttonClassNames = boundClassNames({
+		button: true,
+		[props.color ?? 'default']: true
 	});
 	return (
-		<button className={classes.button} onClick={props.onClick}>
+		<button className={buttonClassNames} onClick={props.onClick}>
 			{props.children}
 		</button>
 	);
