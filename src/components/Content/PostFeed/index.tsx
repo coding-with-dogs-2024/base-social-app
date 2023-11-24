@@ -1,6 +1,6 @@
 import classes from './PostFeed.module.scss';
 import { useGetAllPosts } from '../../../services/jsonapi/api';
-import { Spinner } from '../../UI/Spinner';
+import { CircleSpinner } from '../../UI/Spinner/Circle';
 import { PostCard } from './PostCard';
 import { useEffect, useMemo } from 'react';
 import { usePagination } from '../../UI/Pagination/usePagination';
@@ -28,7 +28,7 @@ export const PostFeed = () => {
 	return (
 		<div className={classes.postFeed}>
 			<h1>Post Feed</h1>
-			{isLoading && <Spinner />}
+			{isLoading && <CircleSpinner />}
 			<div className={classes.postList}>
 				{data &&
 					dataPage.map((post) => (
