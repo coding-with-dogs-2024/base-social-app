@@ -2,6 +2,7 @@ import type { Post } from '../../../../services/jsonapi/types';
 import { Card } from '../../../UI/Card';
 import classes from './PostCard.module.scss';
 import { useGetUserById } from '../../../../services/jsonapi/api';
+import { EllipsisSpinner } from '../../../UI/Spinner/Ellipsis';
 
 type Props = Readonly<{
 	post: Post;
@@ -14,7 +15,10 @@ const PostTitle = (props: Props) => {
 			<div>
 				{props.post.id} - {props.post.title}
 			</div>
-			<div>User Goes Here</div>
+			<div>
+				{isLoading && <EllipsisSpinner />}
+				{data && data.name}
+			</div>
 		</div>
 	);
 };
