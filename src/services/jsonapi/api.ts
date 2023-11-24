@@ -44,7 +44,8 @@ export const useGetUserById = (userId: number): UseQueryResult<User> =>
 				signal
 			})
 				.then((res) => res.json())
-				.then(userSchema.parse)
+				.then(userSchema.parse),
+		enabled: userId > 0
 	});
 
 type GetAllPostsForUserKey = [typeof GET_ALL_POSTS_FOR_USER, number];
