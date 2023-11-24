@@ -5,6 +5,7 @@ import { useGetUserById } from '../../services/jsonapi/api';
 import { EllipsisSpinner } from '../UI/Spinner/Ellipsis';
 import { Link } from 'react-router-dom';
 import { useImmer } from 'use-immer';
+import {Button} from '../UI/Button';
 
 type Props = Readonly<{
 	post: Post;
@@ -41,8 +42,11 @@ const PostBody = (props: Props) => {
 		});
 
 	return (
-		<div>
+		<div className={classes.postBody}>
 			<div>{props.post.body}</div>
+			{/*<div>*/}
+			{/*	<Button>Comments</Button>*/}
+			{/*</div>*/}
 		</div>
 	);
 };
