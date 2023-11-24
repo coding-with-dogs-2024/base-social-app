@@ -8,3 +8,7 @@ export const postSchema = z.object({
 });
 
 export type Post = z.infer<typeof postSchema>;
+
+export const postListSchema = z.array(postSchema).readonly();
+
+export type PostList = z.infer<typeof postListSchema>;
