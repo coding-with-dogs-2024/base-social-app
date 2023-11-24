@@ -48,3 +48,17 @@ export type User = z.infer<typeof userSchema>;
 
 export const userListSchema = z.array(userSchema).readonly();
 export type UserList = z.infer<typeof userListSchema>;
+
+export const commentSchema = z
+	.object({
+		postId: z.number(),
+		id: z.number(),
+		name: z.string(),
+		email: z.string(),
+		body: z.string()
+	})
+	.readonly();
+export type Comment = z.infer<typeof commentSchema>;
+
+export const commentListSchema = z.array(commentSchema).readonly();
+export type CommentList = z.infer<typeof commentListSchema>;
