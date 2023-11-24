@@ -1,5 +1,5 @@
 {
-  "name": "base-app",
+  "name": "@codingwithdogs/base-social-app",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
