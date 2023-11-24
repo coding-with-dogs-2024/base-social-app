@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "start": "vite",
     "lint": "eslint --fix --max-warnings=0 src/**/*.{ts,tsx,js,jsx}",
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@types/node": "^20.9.2",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
