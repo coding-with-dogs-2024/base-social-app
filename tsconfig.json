@@ -12,7 +12,8 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "declaration": false,
-    "module": "esnext"
+    "module": "esnext",
+    "verbatimModuleSyntax": true
   },
   "include": [
     "src/**/*",
