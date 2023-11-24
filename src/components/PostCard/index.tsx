@@ -52,7 +52,7 @@ const PostBody = (props: Props) => {
 					{`${commentsPrefix} Comments`}
 				</Button>
 			</div>
-			{state.showComments && <CommentList />}
+			{state.showComments && <CommentList postId={props.post.id} />}
 		</div>
 	);
 };
