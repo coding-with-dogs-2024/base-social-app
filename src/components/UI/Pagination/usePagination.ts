@@ -18,25 +18,19 @@ export const usePagination = <T>(pageSize: number): UsePaginationReturn<T> => {
 		totalPages: 0
 	});
 
-	const previousPage = useCallback(
-		() =>
-			setState((draft) => {
-				if (previousPageAllowed(draft)) {
-					draft.currentPage--;
-				}
-			}),
-		[setState]
-	);
+	const previousPage = () =>
+		setState((draft) => {
+			if (previousPageAllowed(draft)) {
+				draft.currentPage--;
+			}
+		});
 
-	const nextPage = useCallback(
-		() =>
-			setState((draft) => {
-				if (nextPageAllowed(draft)) {
-					draft.currentPage++;
-				}
-			}),
-		[setState]
-	);
+	const nextPage = () =>
+		setState((draft) => {
+			if (nextPageAllowed(draft)) {
+				draft.currentPage++;
+			}
+		});
 
 	const updatePagination = useCallback(
 		(items: ReadonlyArray<T>) =>
