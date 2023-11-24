@@ -1,3 +1,9 @@
-.title {
+.post-title {
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
+
+  >* {
+    width: 50%;
+  }
 }

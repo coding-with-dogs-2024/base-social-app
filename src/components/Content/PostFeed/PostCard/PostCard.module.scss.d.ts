@@ -1,1 +1,1 @@
-export declare const title: string;
+export declare const postTitle: string;
