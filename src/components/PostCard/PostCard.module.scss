@@ -23,4 +23,8 @@
 .post-body {
   display: flex;
   flex-direction: column;
+
+  .comment-button-wrapper {
+    margin-top: 1rem;
+  }
 }
