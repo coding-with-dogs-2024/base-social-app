@@ -6,10 +6,12 @@
   padding: 1rem;
   width: 100%;
   border-radius: 0.25rem;
+  margin: 1rem 0;
 
   @include box-shadow;
 
   .divider {
     border-bottom: lightgray 1px solid;
+    margin: 0.5rem 0;
   }
 }
