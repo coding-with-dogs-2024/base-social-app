@@ -4,6 +4,7 @@ import { HOST } from '../../../../src/services/jsonapi/api';
 import type { CommentList } from '../../../../src/services/jsonapi/types';
 import { render } from '@testing-library/react';
 import { PostComments } from '../../../../src/components/PostCard/PostComments';
+import {renderWithQueryClient} from '../../../_testutils_/renderWithWrapper';
 
 const POST_ID: number = 1;
 
@@ -48,6 +49,6 @@ describe('PostComments', () => {
 		server.close();
 	});
 	it('renders and loads comments', () => {
-		render(<PostComments postId={POST_ID} />);
+		renderWithQueryClient(<PostComments postId={POST_ID} />);
 	});
 });
