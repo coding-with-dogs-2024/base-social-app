@@ -1,7 +1,7 @@
 import classes from './Registration.module.scss';
-import { Input } from '../../UI/Input';
-import { Radio } from '../../UI/Radio';
-import type { RadioOption } from '../../UI/Radio';
+import { Input } from '../../UI/Form/Input';
+import { Radio } from '../../UI/Form/Radio';
+import type { RadioOption } from '../../UI/Form/Radio';
 
 /*
  * First Name
