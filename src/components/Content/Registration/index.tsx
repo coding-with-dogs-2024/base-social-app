@@ -43,12 +43,14 @@ const useRegistrationForm = (): UseRegistrationFormReturn => {
 	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const name = event.target.name as keyof State;
 		const value = event.target.value;
+		const checked = event.target.checked;
 		setState((draft) => {
 			switch (name) {
 				case 'dailyPostLimit':
 					draft[name] = parseInt(value);
 					break;
 				case 'notifications':
+					draft[name] = checked;
 					break;
 				case 'gender':
 					break;
@@ -129,11 +131,15 @@ export const Registration = () => {
 					<Checkbox
 						name="notifications"
 						labelText="Receive Notifications?"
+						checked={state.notifications}
+						onChange={onChange}
 					/>
 					<Input
 						type="number"
 						name="postLimit"
 						labelText="Daily Post Limit"
+						value={state.dailyPostLimit}
+						onChange={onChange}
 					/>
 				</div>
 			</section>

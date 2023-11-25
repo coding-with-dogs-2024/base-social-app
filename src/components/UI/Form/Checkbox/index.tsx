@@ -1,9 +1,11 @@
 import classes from './Checkbox.module.scss';
-import { useId } from 'react';
+import { ChangeEvent, useId } from 'react';
 
 type Props = Readonly<{
 	labelText?: string;
 	name?: string;
+	checked?: boolean;
+	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }>;
 
 export const Checkbox = (props: Props) => {
@@ -21,6 +23,8 @@ export const Checkbox = (props: Props) => {
 					type="checkbox"
 					name={props.name}
 					id={id}
+					checked={props.checked}
+					onChange={props.onChange}
 				/>
 			</div>
 		</div>
