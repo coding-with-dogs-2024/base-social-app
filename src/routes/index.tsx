@@ -13,6 +13,11 @@ const UserProfile = namedLazy(
 	'UserProfile'
 );
 
+const Registration = namedLazy(
+	() => import('../components/Content/Registration'),
+	'Registration'
+);
+
 export const routes: RouteObject[] = [
 	{
 		path: '/post-feed',
@@ -21,6 +26,10 @@ export const routes: RouteObject[] = [
 	{
 		path: '/user/:id',
 		element: <LazySuspenseWrapper component={UserProfile} />
+	},
+	{
+		path: '/register',
+		element: <LazySuspenseWrapper component={Registration} />
 	},
 	{
 		path: '*',
