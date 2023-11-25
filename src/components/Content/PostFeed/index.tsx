@@ -1,14 +1,13 @@
 import classes from './PostFeed.module.scss';
-// import { useGetAllPosts } from '../../../services/jsonapi/api';
+import { useGetAllPosts } from '../../../services/jsonapi/api';
 import { Spinner } from '../../UI/Spinner';
 
 export const PostFeed = () => {
-	// useGetAllPosts();
+	const { isLoading } = useGetAllPosts();
 	return (
 		<div className={classes.postFeed}>
-			<p>Hello</p>
-			<p>World</p>
-			<Spinner />
+			<h1>Post Feed</h1>
+			{isLoading && <Spinner />}
 		</div>
 	);
 };
