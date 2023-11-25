@@ -1,0 +1,15 @@
+{
+  "name": "base-app",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router": "^6.19.0",
+    "react-router-dom": "^6.19.0"
+  }
+}
