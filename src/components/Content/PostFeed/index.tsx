@@ -29,13 +29,15 @@ export const PostFeed = () => {
 		<div className={classes.postFeed}>
 			<h1>Post Feed</h1>
 			{isLoading && <CircleSpinner />}
-			<div className={classes.postList}>
-				{data &&
-					dataPage.map((post) => (
-						<PostCard key={post.id} post={post} />
-					))}
-				<Pagination {...componentProps} />
-			</div>
+			{!isLoading && (
+				<div className={classes.postList}>
+					{data &&
+						dataPage.map((post) => (
+							<PostCard key={post.id} post={post} />
+						))}
+					<Pagination {...componentProps} />
+				</div>
+			)}
 		</div>
 	);
 };
