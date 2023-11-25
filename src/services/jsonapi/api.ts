@@ -3,7 +3,7 @@ import { commentListSchema, postListSchema, userSchema } from './types';
 import { useQuery } from '@tanstack/react-query';
 import type { UseQueryResult, DefaultError } from '@tanstack/react-query';
 
-const HOST = 'https://jsonplaceholder.typicode.com';
+export const HOST = 'https://jsonplaceholder.typicode.com';
 const GET_ALL_POSTS = 'GET_ALL_POSTS';
 const GET_USER_BY_ID = 'GET_USER_BY_ID';
 const GET_ALL_POSTS_FOR_USER = 'GET_ALL_POSTS_FOR_USER';
