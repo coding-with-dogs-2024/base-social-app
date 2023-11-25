@@ -1,5 +1,5 @@
 import classes from './PostComments.module.scss';
-import { useGetAllCommentsForPost } from '../../../services/jsonapi/api';
+import { useGetAllCommentsForPost as useGetAllCommentsForPostDefault } from '../../../services/jsonapi/api';
 import { EllipsisSpinner } from '../../UI/Spinner/Ellipsis';
 import type { Comment as CommentType } from '../../../services/jsonapi/types';
 
@@ -21,6 +21,28 @@ const Comment = (props: CommentProps) => (
 );
 
 export const PostComments = (props: PostCommentsProps) => {
+	const { isLoading, data } = useGetAllCommentsForPostDefault(props.postId);
+	return (
+		<div className={classes.postComments}>
+			{isLoading && <EllipsisSpinner />}
+			{!isLoading &&
+				data &&
+				data.map((comment) => (
+					<Comment key={comment.id} comment={comment} />
+				))}
+		</div>
+	);
+};
+
+type PostCommentsWithInjectionProps = PostCommentsProps &
+	Readonly<{
+		useGetAllCommentsForPost?: typeof useGetAllCommentsForPostDefault;
+	}>;
+
+export const PostCommentsWithInjection = ({
+	useGetAllCommentsForPost = useGetAllCommentsForPostDefault,
+	...props
+}: PostCommentsWithInjectionProps) => {
 	const { isLoading, data } = useGetAllCommentsForPost(props.postId);
 	return (
 		<div className={classes.postComments}>
