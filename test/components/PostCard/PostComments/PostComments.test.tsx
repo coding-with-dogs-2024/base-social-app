@@ -32,7 +32,7 @@ const handlers: ReadonlyArray<HttpHandler> = [
 		if (postId && parseInt(postId) === POST_ID) {
 			return HttpResponse.json(comments);
 		}
-		return [];
+		return HttpResponse.json([]);
 	})
 ];
 
