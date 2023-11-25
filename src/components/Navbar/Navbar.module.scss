@@ -7,8 +7,11 @@
   padding: 1rem;
 
   .title {
-    color: $font-light;
     margin: 0;
 
+    a {
+      color: $font-light;
+      text-decoration: none;
+    }
   }
 }
