@@ -3,7 +3,7 @@ import { useGetAllPosts } from '../../../services/jsonapi/api';
 import { Spinner } from '../../UI/Spinner';
 import { PostCard } from './PostCard';
 import { useEffect } from 'react';
-import { usePagination } from '../../common/usePagination';
+import { usePagination } from '../../UI/Pagination/usePagination';
 import type { Post } from '../../../services/jsonapi/types';
 
 const PAGE_SIZE = 10;
