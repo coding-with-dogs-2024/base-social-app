@@ -19,6 +19,10 @@
     padding: 1rem;
   }
 
+  &.size-large {
+    padding: 2rem;
+  }
+
   &.color-primary {
     background-color: $color-primary;
     color: $text-when-bg-color-primary;

@@ -21,4 +21,18 @@ describe('Button', () => {
 		await userEvent.click(button);
 		expect(onClick).toHaveBeenCalledOnce();
 	});
+
+	it('sets different color & size classes', () => {
+		render(
+			<div>
+				<Button>Default Button</Button>
+				<Button color="primary" size="small">
+					Small Primary Button
+				</Button>
+				<Button color="secondary" size="large">
+					Large Secondary Button
+				</Button>
+			</div>
+		);
+	});
 });
