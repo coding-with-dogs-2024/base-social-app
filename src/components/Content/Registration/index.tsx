@@ -2,17 +2,7 @@ import classes from './Registration.module.scss';
 import { Input } from '../../UI/Form/Input';
 import { Radio } from '../../UI/Form/Radio';
 import type { RadioOption } from '../../UI/Form/Radio';
-
-/*
- * First Name
- * Last Name
- * Email
- * Password (Password)
- * Date of Birth (Date)
- * Gender (Radio)
- * Receive Notifications? (Checkbox)
- * Daily Post Limit (number)
- */
+import { Checkbox } from '../../UI/Form/Checkbox';
 
 const GENDER_OPTIONS: ReadonlyArray<RadioOption> = [
 	{ value: 'male', label: 'Male' },
@@ -52,6 +42,10 @@ export const Registration = () => (
 		<section>
 			<h2>App Settings</h2>
 			<div className={classes.row}>
+				<Checkbox
+					name="notifications"
+					labelText="Receive Notifications?"
+				/>
 				<Input
 					type="number"
 					name="postLimit"

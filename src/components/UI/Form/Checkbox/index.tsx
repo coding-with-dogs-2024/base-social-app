@@ -10,7 +10,7 @@ export const Checkbox = (props: Props) => {
 	const id = useId();
 	return (
 		<div className={classes.checkboxWrapper}>
-			{props.labelText ?? (
+			{props.labelText && (
 				<label className={classes.label} htmlFor={id}>
 					{props.labelText}
 				</label>
