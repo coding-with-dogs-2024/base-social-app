@@ -1,0 +1,11 @@
+@mixin wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0.5rem;
+}
+
+@mixin label {
+  margin-left: 0.25rem;
+  font-weight: bold;
+}

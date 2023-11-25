@@ -1,9 +1,13 @@
+@import "../form-common";
+
 .radio-wrapper {
-  display: flex;
-  flex-direction: column;
+  @include wrapper;
+
   justify-content: space-between;
-  width: 100%;
-  margin: 0.5rem;
+
+  .label {
+    @include label;
+  }
 
   .options {
     display: flex;
