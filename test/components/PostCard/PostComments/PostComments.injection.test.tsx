@@ -3,10 +3,6 @@ import { render, screen, within } from '@testing-library/react';
 import { PostCommentsWithInjection } from '../../../../src/components/PostCard/PostComments';
 import type { MockedFunction } from 'vitest';
 import { useGetAllCommentsForPost as useGetAllCommentsForPostDefault } from '../../../../src/services/jsonapi/api';
-import {
-	createIsLoadingUseQueryResult,
-	createLoadedUseQueryResult
-} from '../../../_testutils_/reactQueryMocks';
 
 const POST_ID: number = 1;
 
@@ -37,9 +33,10 @@ describe('PostComments', () => {
 	});
 
 	it('renders loading spinner', () => {
-		useGetAllCommentsForPost.mockReturnValue(
-			createIsLoadingUseQueryResult()
-		);
+		useGetAllCommentsForPost.mockReturnValue({
+			isLoading: true,
+			data: undefined
+		});
 		render(
 			<PostCommentsWithInjection
 				postId={POST_ID}
@@ -51,9 +48,10 @@ describe('PostComments', () => {
 	});
 
 	it('renders comments', () => {
-		useGetAllCommentsForPost.mockReturnValue(
-			createLoadedUseQueryResult(comments)
-		);
+		useGetAllCommentsForPost.mockReturnValue({
+			isLoading: false,
+			data: comments
+		});
 		render(
 			<PostCommentsWithInjection
 				postId={POST_ID}

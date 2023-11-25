@@ -67,7 +67,7 @@ export const useGetAllPostsForUser = (
 type GetAllCommentsForPostKey = [typeof GET_ALL_COMMENTS_FOR_POST, number];
 export const useGetAllCommentsForPost = (
 	postId: number
-): UseQueryResult<CommentList> =>
+): Pick<UseQueryResult<CommentList>, 'isLoading' | 'data'> =>
 	useQuery<CommentList, DefaultError, CommentList, GetAllCommentsForPostKey>({
 		queryKey: [GET_ALL_COMMENTS_FOR_POST, postId],
 		queryFn: ({ signal, queryKey: [, postIdParam] }) =>
