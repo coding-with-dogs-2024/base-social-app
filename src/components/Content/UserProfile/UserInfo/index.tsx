@@ -1,5 +1,6 @@
 import type { User } from '../../../../services/jsonapi/types';
 import classes from './UserInfo.module.scss';
+import { Card } from '../../../UI/Card';
 
 type UserInfoProps = Readonly<{
 	user: User;
@@ -25,12 +26,17 @@ export const UserInfo = (props: UserInfoProps) => {
 	} = props.user;
 	const addressString = `${street}, ${suite}, ${city} ${zipcode}`;
 	return (
-		<div className={classes.userInfo}>
-			<Row label="Email" value={props.user.email} />
-			<Row label="Address" value={addressString} />
-			<Row label="Phone" value={props.user.phone} />
-			<Row label="Website" value={props.user.website} />
-			<Row label="Company" value={props.user.company.name} />
-		</div>
+		<Card
+			title={<h2 className={classes.userInfoTitle}>{props.user.name}</h2>}
+			body={
+				<div className={classes.userInfoContent}>
+					<Row label="Email" value={props.user.email} />
+					<Row label="Address" value={addressString} />
+					<Row label="Phone" value={props.user.phone} />
+					<Row label="Website" value={props.user.website} />
+					<Row label="Company" value={props.user.company.name} />
+				</div>
+			}
+		/>
 	);
 };
