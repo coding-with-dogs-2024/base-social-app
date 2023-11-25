@@ -4,8 +4,9 @@ import { useQuery } from '@tanstack/react-query';
 import type { UseQueryResult, DefaultError } from '@tanstack/react-query';
 
 const HOST = 'https://jsonplaceholder.typicode.com';
-export const GET_ALL_POSTS = 'GET_ALL_POSTS';
-export const GET_USER_BY_ID = 'GET_USER_BY_ID';
+const GET_ALL_POSTS = 'GET_ALL_POSTS';
+const GET_USER_BY_ID = 'GET_USER_BY_ID';
+const GET_ALL_POSTS_FOR_USER = 'GET_ALL_POSTS_FOR_USER';
 
 /**
  * The JSON Placeholder API returns the posts in too elegant of
@@ -38,10 +39,24 @@ type GetUserByIdQueryKey = [typeof GET_USER_BY_ID, number];
 export const useGetUserById = (userId: number): UseQueryResult<User> =>
 	useQuery<User, DefaultError, User, GetUserByIdQueryKey>({
 		queryKey: [GET_USER_BY_ID, userId],
-		queryFn: ({ signal, queryKey: [, userId] }) =>
-			fetch(`${HOST}/users/${userId}`, {
+		queryFn: ({ signal, queryKey: [, userIdParam] }) =>
+			fetch(`${HOST}/users/${userIdParam}`, {
 				signal
 			})
 				.then((res) => res.json())
 				.then(userSchema.parse)
+	});
+
+type GetAllPostsForUserKey = [typeof GET_ALL_POSTS_FOR_USER, number];
+export const useGetAllPostsForUser = (
+	userId: number
+): UseQueryResult<PostList> =>
+	useQuery<PostList, DefaultError, PostList, GetAllPostsForUserKey>({
+		queryKey: [GET_ALL_POSTS_FOR_USER, userId],
+		queryFn: ({ signal, queryKey: [, userIdParam] }) =>
+			fetch(`${HOST}/posts?userId=${userIdParam}`, {
+				signal
+			})
+				.then((res) => res.json())
+				.then(postListSchema.parse)
 	});
