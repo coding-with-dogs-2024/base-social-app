@@ -1,4 +1,5 @@
-import fetchMock from 'fetch-mock';
+import axios from 'axios';
+import MockAdapter from 'axios-mock-adapter';
 import type { CommentList } from '../../../../src/services/jsonapi/types';
 import { HOST } from '../../../../src/services/jsonapi/api';
 import { renderWithQueryClient } from '../../../_testutils_/renderWithWrapper';
@@ -6,6 +7,8 @@ import { PostComments } from '../../../../src/components/PostCard/PostComments';
 import { screen, within } from '@testing-library/react';
 
 const POST_ID: number = 1;
+
+const mockApi = new MockAdapter(axios);
 
 const comments: CommentList = [
 	{
@@ -25,11 +28,11 @@ const comments: CommentList = [
 ];
 
 describe('PostComments', () => {
+	beforeEach(() => {
+		mockApi.reset();
+	});
 	it('renders the comments', async () => {
-		fetchMock.get(`${HOST}/posts/${POST_ID}/comments`, {
-			status: 200,
-			body: comments
-		});
+		mockApi.onGet(`${HOST}/posts/${POST_ID}/comments`).reply(200, comments);
 
 		renderWithQueryClient(<PostComments postId={POST_ID} />);
 		expect(screen.getByRole('progressbar')).toBeVisible();
