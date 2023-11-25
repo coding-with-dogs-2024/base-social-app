@@ -18,29 +18,32 @@ export const usePagination = <T>(pageSize: number): UsePaginationReturn<T> => {
 		totalPages: 0
 	});
 
-	const previousPage = () =>
+	const previousPage = () => {
 		setState((draft) => {
 			if (previousPageAllowed(draft)) {
 				draft.currentPage--;
 			}
 		});
+	};
 
-	const nextPage = () =>
+	const nextPage = () => {
 		setState((draft) => {
 			if (nextPageAllowed(draft)) {
 				draft.currentPage++;
 			}
 		});
+	};
 
 	const updatePagination = useCallback(
-		(items: ReadonlyArray<T>) =>
+		(items: ReadonlyArray<T>) => {
 			setState((draft) => {
 				draft.currentPage = 0;
 				const remainder = items.length % pageSize;
 				draft.totalPages =
 					Math.floor(items.length / pageSize) +
 					(remainder > 0 ? 1 : 0);
-			}),
+			});
+		},
 		[setState, pageSize]
 	);
 

@@ -37,10 +37,11 @@ const PostBody = (props: Props) => {
 	const [state, setState] = useImmer<PostBodyState>({
 		showComments: false
 	});
-	const toggleShowComments = () =>
+	const toggleShowComments = () => {
 		setState((draft) => {
 			draft.showComments = !draft.showComments;
 		});
+	};
 
 	const commentsPrefix = state.showComments ? 'Hide' : 'Show';
 

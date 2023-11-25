@@ -32,7 +32,7 @@ export const useGetAllPosts = (): UseQueryResult<ReadonlyArray<Post>> =>
 				signal
 			})
 				.then((res) => res.json())
-				.then(postListSchema.parse)
+				.then((json) => postListSchema.parse(json))
 				.then(reOrderPosts)
 	});
 
@@ -45,7 +45,7 @@ export const useGetUserById = (userId: number): UseQueryResult<User> =>
 				signal
 			})
 				.then((res) => res.json())
-				.then(userSchema.parse),
+				.then((json) => userSchema.parse(json)),
 		enabled: userId > 0
 	});
 
@@ -60,7 +60,7 @@ export const useGetAllPostsForUser = (
 				signal
 			})
 				.then((res) => res.json())
-				.then(postListSchema.parse)
+				.then((json) => postListSchema.parse(json))
 	});
 
 type GetAllCommentsForPostKey = [typeof GET_ALL_COMMENTS_FOR_POST, number];
@@ -74,6 +74,6 @@ export const useGetAllCommentsForPost = (
 				signal
 			})
 				.then((res) => res.json())
-				.then(commentListSchema.parse),
+				.then((json) => commentListSchema.parse(json)),
 		enabled: postId > 0
 	});

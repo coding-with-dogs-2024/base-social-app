@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
 	extends: [
 		'eslint:recommended',
@@ -37,8 +39,11 @@ module.exports = {
 		{
 			files: ['**/*.{ts,tsx,mts,cts}'],
 			parser: '@typescript-eslint/parser',
+			parserOptions: {
+				project: path.join(process.cwd(), 'tsconfig.json')
+			},
 			extends: [
-				'plugin:@typescript-eslint/strict',
+				'plugin:@typescript-eslint/strict-type-checked',
 				'plugin:import/typescript'
 			],
 			settings: {
