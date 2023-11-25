@@ -1,8 +1,15 @@
 {
   "name": "base-app",
   "version": "1.0.0",
+  "type": "module",
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "eslint": "^8.54.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "^3.1.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
   },
