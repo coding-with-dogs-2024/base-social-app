@@ -1,12 +1,11 @@
 import classes from './Input.module.scss';
-import type { InputHTMLAttributes } from 'react';
 import { useId } from 'react';
 
-type Props = Readonly<InputHTMLAttributes<HTMLInputElement>> &
-	Readonly<{
-		labelText?: string;
-		type?: 'text' | 'date' | 'password' | 'number';
-	}>;
+type Props = Readonly<{
+	labelText?: string;
+	name?: string;
+	type?: 'text' | 'date' | 'password' | 'number';
+}>;
 
 export const Input = (props: Props) => {
 	const id = useId();
