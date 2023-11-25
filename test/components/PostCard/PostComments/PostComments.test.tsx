@@ -53,9 +53,11 @@ describe('PostComments', () => {
 		const progressbar = await screen.findByRole('progressbar');
 		expect(progressbar).toBeVisible();
 
-		const firstComment = await screen.findByText('First Comment');
+		const firstComment = await screen.findByText('This is the first post');
 		expect(firstComment).toBeVisible();
-		const secondComment = screen.getByText('Second Comment');
-		expect(secondComment).toBeVisible();
+		expect(screen.getByText('first@gmail.com')).toBeVisible();
+
+		expect(screen.getByText('This is the second post')).toBeVisible();
+		expect(screen.getByText('second@gmail.com')).toBeVisible();
 	});
 });
