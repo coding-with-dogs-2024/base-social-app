@@ -1,5 +1,6 @@
 import classes from './Checkbox.module.scss';
-import { ChangeEvent, useId } from 'react';
+import type { ChangeEvent } from 'react';
+import { useId } from 'react';
 
 type Props = Readonly<{
 	labelText?: string;
