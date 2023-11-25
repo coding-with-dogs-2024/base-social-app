@@ -2,6 +2,10 @@
 @import "../../../assets/styles/variables";
 @import "../../../assets/styles/common";
 
+@function hover-darken($color) {
+  @return color.adjust($color, $lightness: -10%);
+}
+
 .button {
   all: unset;
   padding: 1rem;
@@ -14,7 +18,7 @@
     background-color: $color-primary;
 
     &:hover {
-      background-color: color.adjust($color-primary, $lightness: -10%);
+      background-color: hover-darken($color-primary);
     }
   }
 
@@ -22,7 +26,7 @@
     background-color: $color-secondary;
 
     &:hover {
-      background-color: color.adjust($color-secondary, $lightness: -10%);
+      background-color: hover-darken($color-secondary);
     }
   }
 
@@ -31,7 +35,7 @@
     border: 1px lightgray solid;
 
     &:hover {
-      background-color: color.adjust(white, $lightness: -10%);
+      background-color: hover-darken(white);
     }
   }
 }
