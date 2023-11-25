@@ -29,7 +29,40 @@ const useGetAllCommentsForPost: MockedFunction<
 	typeof useGetAllCommentsForPostDefault
 > = vi.fn();
 
-const createMockUseQueryResult = <T extends object>(): UseQueryResult<T> => ({
+// TODO should T extend object?
+
+const createLoadedUseQueryResult = <T extends object>(
+	data: T
+): UseQueryResult<T> => ({
+	data,
+	isLoadingError: false,
+	isLoading: false,
+	error: null,
+	isRefetchError: false,
+	fetchStatus: 'idle',
+	isSuccess: true,
+	status: 'success',
+	refetch: vi.fn(),
+	isRefetching: false,
+	isStale: false,
+	isPlaceholderData: false,
+	isFetchedAfterMount: false,
+	isFetching: false,
+	failureReason: null,
+	isError: false,
+	failureCount: 0,
+	errorUpdatedAt: 0,
+	dataUpdatedAt: 0,
+	isPending: false,
+	isPaused: false,
+	isFetched: true,
+	errorUpdateCount: 0,
+	isInitialLoading: false
+});
+
+const createIsLoadingUseQueryResult = <
+	T extends object
+>(): UseQueryResult<T> => ({
 	isLoading: true,
 	data: undefined,
 	error: null,
@@ -62,10 +95,9 @@ describe('PostComments', () => {
 	});
 
 	it('renders loading spinner', () => {
-		useGetAllCommentsForPost.mockReturnValue({
-			...createMockUseQueryResult<CommentList>(),
-			isLoading: true
-		});
+		useGetAllCommentsForPost.mockReturnValue(
+			createIsLoadingUseQueryResult()
+		);
 		render(
 			<PostCommentsWithInjection
 				postId={POST_ID}
@@ -76,7 +108,35 @@ describe('PostComments', () => {
 		expect(screen.queryAllByTestId('comment')).toHaveLength(0);
 	});
 
-	it('renders comments', () => {});
+	it('renders comments', () => {
+		useGetAllCommentsForPost.mockReturnValue(
+			createLoadedUseQueryResult(comments)
+		);
+		render(
+			<PostCommentsWithInjection
+				postId={POST_ID}
+				useGetAllCommentsForPost={useGetAllCommentsForPost}
+			/>
+		);
+		expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+
+		const commentElements = screen.getAllByTestId('comment');
+		expect(commentElements).toHaveLength(2);
+
+		expect(
+			within(commentElements[0]).getByText('first@gmail.com')
+		).toBeVisible();
+		expect(
+			within(commentElements[0]).getByText('This is the first post')
+		).toBeVisible();
+
+		expect(
+			within(commentElements[1]).getByText('second@gmail.com')
+		).toBeVisible();
+		expect(
+			within(commentElements[1]).getByText('This is the second post')
+		).toBeVisible();
+	});
 
 	it('renders and loads comments', async () => {
 		renderWithQueryClient(<PostCommentsWithInjection postId={POST_ID} />);
