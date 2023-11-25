@@ -39,5 +39,23 @@ describe('Registration', () => {
 		// Point out this is counter-intuitive
 		await userEvent.type(dateOfBirthInput, '2020-01-01');
 		expect(dateOfBirthInput).toHaveValue('2020-01-01');
+
+		const genderMaleInput = screen.getByLabelText('Male');
+		const genderFemaleInput = screen.getByLabelText('Female');
+		const genderOtherInput = screen.getByLabelText('Other');
+
+		expect(genderMaleInput).toBeChecked();
+		expect(genderFemaleInput).not.toBeChecked();
+		expect(genderOtherInput).not.toBeChecked();
+
+		await userEvent.click(genderFemaleInput);
+		expect(genderMaleInput).not.toBeChecked();
+		expect(genderFemaleInput).toBeChecked();
+		expect(genderOtherInput).not.toBeChecked();
+
+		await userEvent.click(genderOtherInput);
+		expect(genderMaleInput).not.toBeChecked();
+		expect(genderFemaleInput).not.toBeChecked();
+		expect(genderOtherInput).toBeChecked();
 	});
 });
