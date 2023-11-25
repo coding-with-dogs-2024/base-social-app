@@ -27,8 +27,8 @@ const comments: CommentList = [
 
 const handlers: ReadonlyArray<HttpHandler> = [
 	http.get(`${HOST}/posts/${POST_ID}/comments`, ({ request }) => {
-		const postId = /^.+\/posts\/(\d+)\/comments$/.exec(request.url)
-			?.groups?.[0];
+		const postId = /^.+\/posts\/(?<postId>\d+)\/comments$/.exec(request.url)
+			?.groups?.postId;
 		if (postId && parseInt(postId) === POST_ID) {
 			return HttpResponse.json(comments);
 		}
