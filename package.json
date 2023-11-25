@@ -7,7 +7,10 @@
     "typeCheck": "typed-scss-modules src && tsc --noEmit --project ./test/tsconfig.json",
     "lint": "eslint --fix --max-warnings=0 'src/**/*.{ts,tsx,js,jsx}' && stylelint --fix --max-warnings=0 'src/**/*.{css,scss}'",
     "prepare": "husky install",
-    "test": "vitest"
+    "test": "vitest",
+    "prepare": "husky install",
+    "validate": "npm run typeCheck && npm run lint",
+    "build": "vite build"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^5.8.4",
