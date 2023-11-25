@@ -8,4 +8,8 @@
   border-radius: 0.25rem;
 
   @include box-shadow;
+
+  .divider {
+    border-bottom: lightgray 1px solid;
+  }
 }

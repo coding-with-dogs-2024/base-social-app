@@ -10,7 +10,7 @@ export const Card = (props: Props) => {
 	return (
 		<div className={classes.card}>
 			{props.title}
-			<hr />
+			<span className={classes.divider} />
 			{props.body}
 		</div>
 	);
