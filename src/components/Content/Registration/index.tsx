@@ -1,19 +1,24 @@
 import classes from './Registration.module.scss';
 import { Input } from '../../UI/Form/Input';
 import { Radio } from '../../UI/Form/Radio';
-import type { RadioOption } from '../../UI/Form/Radio';
 import { Checkbox } from '../../UI/Form/Checkbox';
 import { useImmer } from 'use-immer';
 import type { ChangeEvent } from 'react';
+import type { FormOption } from '../../UI/Form/types';
+import { Select } from '../../UI/Form/Select';
 
 type Gender = 'male' | 'female' | 'other';
+type UserType = 'standard' | 'admin';
 
-// TODO need select box
-
-const GENDER_OPTIONS: ReadonlyArray<RadioOption<Gender>> = [
+const GENDER_OPTIONS: ReadonlyArray<FormOption<Gender>> = [
 	{ value: 'male', label: 'Male' },
 	{ value: 'female', label: 'Female' },
 	{ value: 'other', label: 'Other' }
+];
+
+const USER_TYPE_OPTIONS: ReadonlyArray<FormOption<UserType>> = [
+	{ value: 'standard', label: 'Standard' },
+	{ value: 'admin', label: 'Admin' }
 ];
 
 type State = Readonly<{
@@ -25,11 +30,13 @@ type State = Readonly<{
 	gender: Gender;
 	notifications: boolean;
 	dailyPostLimit: number;
+	userType: UserType;
 }>;
 
 type UseRegistrationFormReturn = Readonly<{
 	state: State;
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	onSelectChange: (e: ChangeEvent<HTMLSelectElement>) => void;
 }>;
 
 const useRegistrationForm = (): UseRegistrationFormReturn => {
@@ -41,13 +48,11 @@ const useRegistrationForm = (): UseRegistrationFormReturn => {
 		email: '',
 		gender: 'male',
 		notifications: true,
-		password: ''
+		password: '',
+		userType: 'standard'
 	});
 
-	const onChange = (event: ChangeEvent<HTMLInputElement>) => {
-		const name = event.target.name as keyof State;
-		const value = event.target.value;
-		const checked = event.target.checked;
+	const onChange = (name: keyof State, value: string, checked: boolean) => {
 		setState((draft) => {
 			switch (name) {
 				case 'dailyPostLimit':
@@ -59,6 +64,9 @@ const useRegistrationForm = (): UseRegistrationFormReturn => {
 				case 'gender':
 					draft[name] = value as Gender;
 					break;
+				case 'userType':
+					draft[name] = value as UserType;
+					break;
 				default:
 					draft[name] = value;
 					break;
@@ -66,14 +74,28 @@ const useRegistrationForm = (): UseRegistrationFormReturn => {
 		});
 	};
 
+	const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+		const name = event.target.name as keyof State;
+		const value = event.target.value;
+		const checked = event.target.checked;
+		onChange(name, value, checked);
+	};
+
+	const onSelectChange = (event: ChangeEvent<HTMLSelectElement>) => {
+		const name = event.target.name as keyof State;
+		const value = event.target.value;
+		onChange(name, value, false);
+	};
+
 	return {
 		state,
-		onChange
+		onInputChange,
+		onSelectChange
 	};
 };
 
 export const Registration = () => {
-	const { state, onChange } = useRegistrationForm();
+	const { state, onInputChange, onSelectChange } = useRegistrationForm();
 	return (
 		<div className={classes.registration}>
 			<h1>Registration</h1>
@@ -86,14 +108,14 @@ export const Registration = () => {
 						name="email"
 						labelText="Email"
 						value={state.email}
-						onChange={onChange}
+						onChange={onInputChange}
 					/>
 					<Input
 						type="password"
 						name="password"
 						labelText="Password"
 						value={state.password}
-						onChange={onChange}
+						onChange={onInputChange}
 					/>
 				</div>
 			</section>
@@ -105,14 +127,14 @@ export const Registration = () => {
 						name="firstName"
 						labelText="First Name"
 						value={state.firstName}
-						onChange={onChange}
+						onChange={onInputChange}
 					/>
 					<Input
 						type="text"
 						name="lastName"
 						labelText="Last Name"
 						value={state.lastName}
-						onChange={onChange}
+						onChange={onInputChange}
 					/>
 				</div>
 				<div className={classes.row}>
@@ -121,14 +143,14 @@ export const Registration = () => {
 						name="dateOfBirth"
 						labelText="Date of Birth"
 						value={state.dateOfBirth}
-						onChange={onChange}
+						onChange={onInputChange}
 					/>
 					<Radio
 						labelText="Gender"
 						name="gender"
 						options={GENDER_OPTIONS}
 						selected={state.gender}
-						onChange={onChange}
+						onChange={onInputChange}
 					/>
 				</div>
 			</section>
@@ -139,14 +161,23 @@ export const Registration = () => {
 						name="notifications"
 						labelText="Receive Notifications?"
 						checked={state.notifications}
-						onChange={onChange}
+						onChange={onInputChange}
 					/>
 					<Input
 						type="number"
 						name="dailyPostLimit"
 						labelText="Daily Post Limit"
 						value={state.dailyPostLimit}
-						onChange={onChange}
+						onChange={onInputChange}
+					/>
+				</div>
+				<div className={classes.row}>
+					<Select
+						labelText="User Type"
+						options={USER_TYPE_OPTIONS}
+						name="userType"
+						selected={state.userType}
+						onChange={onSelectChange}
 					/>
 				</div>
 			</section>

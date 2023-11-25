@@ -1,0 +1,9 @@
+@import "../form-common";
+
+.select {
+  @include wrapper;
+
+  .label {
+    @include label;
+  }
+}

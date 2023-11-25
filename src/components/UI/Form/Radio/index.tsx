@@ -1,22 +1,18 @@
 import classes from './Radio.module.scss';
 import type { ChangeEvent } from 'react';
 import { useId } from 'react';
-
-export type RadioOption<Value extends string> = Readonly<{
-	value: Value;
-	label: string;
-}>;
+import type { FormOption } from '../types';
 
 type RadioProps<Value extends string> = Readonly<{
 	labelText?: string;
 	name: string;
-	options: ReadonlyArray<RadioOption<Value>>;
+	options: ReadonlyArray<FormOption<Value>>;
 	selected: Value;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }>;
 
 type RadioOptionProps<Value extends string> = Readonly<{
-	option: RadioOption<Value>;
+	option: FormOption<Value>;
 	name: string;
 	selected: Value;
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
