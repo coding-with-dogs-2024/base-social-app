@@ -4,7 +4,9 @@ import { Button } from '../Button';
 
 export const Pagination = (props: PaginationComponentProps) => (
 	<div className={classes.pagination}>
-		<Button onClick={props.previousPage}>Previous</Button>
-		<Button onClick={props.nextPage}>Next</Button>
+		{props.showPreviousPage && (
+			<Button onClick={props.previousPage}>Previous</Button>
+		)}
+		{props.showNextPage && <Button onClick={props.nextPage}>Next</Button>}
 	</div>
 );
