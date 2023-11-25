@@ -9,9 +9,7 @@ export default defineConfig({
 	test: {
 		root: path.join(process.cwd(), 'test'),
 		environment: 'jsdom',
-		setupFiles: [
-			path.join(process.cwd(), 'test', 'setup.ts')
-		]
+		setupFiles: [path.join(process.cwd(), 'test', 'setup.ts')]
 	},
 	css: {
 		modules: {
