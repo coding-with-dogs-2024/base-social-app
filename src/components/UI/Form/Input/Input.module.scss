@@ -1,0 +1,13 @@
+@import "../form-common";
+
+.input-wrapper {
+  @include wrapper;
+
+  .label {
+    @include label;
+  }
+
+  .input {
+    @include input-common;
+  }
+}
