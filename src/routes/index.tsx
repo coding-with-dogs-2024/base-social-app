@@ -1,6 +1,7 @@
 import type { RouteObject } from 'react-router';
 import { Navigate } from 'react-router';
 import { namedLazy } from '../utils/namedLazy';
+import { LazySuspenseWrapper } from '../components/UI/LazySuspenseWrapper';
 
 const PostFeed = namedLazy(
 	() => import('../components/Content/PostFeed'),
@@ -15,11 +16,11 @@ const UserProfile = namedLazy(
 export const routes: RouteObject[] = [
 	{
 		path: '/post-feed',
-		element: <PostFeed />
+		element: <LazySuspenseWrapper component={PostFeed} />
 	},
 	{
 		path: '/user/:id',
-		element: <UserProfile />
+		element: <LazySuspenseWrapper component={UserProfile} />
 	},
 	{
 		path: '*',
