@@ -34,9 +34,32 @@ describe('Button', () => {
 				</Button>
 			</div>
 		);
+
 		const defaultButton = screen.getByRole('button', {
 			name: 'Default Button'
 		});
-		expect(defaultButton).toHaveClass('_button_d2dd1d');
+		expect(defaultButton).toHaveClass(
+			'button',
+			'color-default',
+			'size-default'
+		);
+
+		const smallPrimaryButton = screen.getByRole('button', {
+			name: 'Small Primary Button'
+		});
+		expect(smallPrimaryButton).toHaveClass(
+			'button',
+			'color-primary',
+			'size-small'
+		);
+
+		const largeSeconaryButton = screen.getByRole('button', {
+			name: 'Large Secondary Button'
+		});
+		expect(largeSeconaryButton).toHaveClass(
+			'button',
+			'color-secondary',
+			'size-large'
+		);
 	});
 });
