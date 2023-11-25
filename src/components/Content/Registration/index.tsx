@@ -143,7 +143,7 @@ export const Registration = () => {
 					/>
 					<Input
 						type="number"
-						name="postLimit"
+						name="dailyPostLimit"
 						labelText="Daily Post Limit"
 						value={state.dailyPostLimit}
 						onChange={onChange}
