@@ -1,1 +1,1 @@
-export const CommentList = () => <div>Comments</div>;
+export const CommentList = () => <div>Comment List</div>;
