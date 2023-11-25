@@ -9,3 +9,8 @@
   margin-left: 0.25rem;
   font-weight: bold;
 }
+
+@mixin input-border {
+  border: 5px solid lightgray;
+  border-radius: 0.25rem;
+}
