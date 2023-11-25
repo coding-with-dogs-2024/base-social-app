@@ -49,5 +49,15 @@ export const Registration = () => (
 				/>
 			</div>
 		</section>
+		<section>
+			<h2>App Settings</h2>
+			<div className={classes.row}>
+				<Input
+					type="number"
+					name="postLimit"
+					labelText="Daily Post Limit"
+				/>
+			</div>
+		</section>
 	</div>
 );
