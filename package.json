@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
+    "lint": "eslint --fix --max-warnings=0 src/**/*.{ts,tsx,js,jsx}",
     "prepare": "husky install"
   },
   "devDependencies": {
