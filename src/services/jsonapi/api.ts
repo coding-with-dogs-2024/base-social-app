@@ -73,7 +73,7 @@ export const useGetAllCommentsForPost = (
 			fetch(`${HOST}/posts/${postIdParam}/comments`, {
 				signal
 			})
-				.then((res) => res.json)
+				.then((res) => res.json())
 				.then(commentListSchema.parse),
 		enabled: postId > 0
 	});
