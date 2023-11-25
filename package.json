@@ -26,6 +26,7 @@
     "@vitejs/plugin-react-swc": "^3.5.0",
     "@vitest/ui": "^0.34.6",
     "axios-mock-adapter": "^1.22.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-import-resolver-typescript": "^3.6.1",

@@ -1,4 +1,7 @@
-const path = require('path');
+const tsConfiguration =
+	process.env.ESLINT_FAST === 'true'
+		? 'plugin:@typescript-eslint/recommended'
+		: 'plugin:@typescript-eslint/recommended-type-checked';
 
 module.exports = {
 	extends: [
@@ -40,12 +43,9 @@ module.exports = {
 			files: ['**/*.{ts,tsx,mts,cts}'],
 			parser: '@typescript-eslint/parser',
 			parserOptions: {
-				project: path.join(process.cwd(), 'test', 'tsconfig.json')
+				project: true
 			},
-			extends: [
-				'plugin:@typescript-eslint/strict-type-checked',
-				'plugin:import/typescript'
-			],
+			extends: [tsConfiguration, 'plugin:import/typescript'],
 			settings: {
 				'import/resolver': {
 					typescript: {}
