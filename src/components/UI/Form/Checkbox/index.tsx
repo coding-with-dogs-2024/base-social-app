@@ -15,7 +15,12 @@ export const Checkbox = (props: Props) => {
 					{props.labelText}
 				</label>
 			)}
-			<input type="checkbox" name={props.name} id={id} />
+			<input
+				className={classes.checkbox}
+				type="checkbox"
+				name={props.name}
+				id={id}
+			/>
 		</div>
 	);
 };

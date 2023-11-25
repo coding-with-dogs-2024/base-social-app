@@ -2,8 +2,14 @@
 
 .checkbox-wrapper {
   @include wrapper;
+  flex-direction: row;
+  align-items: center;
 
   .label {
     @include label;
+  }
+
+  .checkbox {
+
   }
 }
