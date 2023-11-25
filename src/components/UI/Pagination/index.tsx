@@ -3,7 +3,7 @@ import type { PaginationComponentProps } from './types';
 import { Button } from '../Button';
 
 export const Pagination = (props: PaginationComponentProps) => (
-	<div className={classes.pagination}>
+	<div data-testid="pagination" className={classes.pagination}>
 		{props.showPreviousPage && (
 			<Button onClick={props.previousPage}>Previous</Button>
 		)}

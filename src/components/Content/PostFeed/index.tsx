@@ -1,7 +1,7 @@
 import classes from './PostFeed.module.scss';
 import { useGetAllPosts as useGetAllPostsDefault } from '../../../services/jsonapi/api';
 import { CircleSpinner } from '../../UI/Spinner/Circle';
-import { PostCard } from '../../PostCard';
+import { PostCard as PostCardDefault } from '../../PostCard';
 import { useEffect, useMemo } from 'react';
 import { usePagination } from '../../UI/Pagination/usePagination';
 import type { Post } from '../../../services/jsonapi/types';
@@ -9,6 +9,7 @@ import { Pagination } from '../../UI/Pagination';
 
 type Props = Readonly<{
 	useGetAllPosts?: typeof useGetAllPostsDefault;
+	PostCard?: typeof PostCardDefault;
 }>;
 
 export const PostFeed = () => {
@@ -37,7 +38,7 @@ export const PostFeed = () => {
 				<div className={classes.postList}>
 					{data &&
 						dataPage.map((post) => (
-							<PostCard key={post.id} post={post} />
+							<PostCardDefault key={post.id} post={post} />
 						))}
 					<Pagination {...componentProps} />
 				</div>
@@ -47,7 +48,8 @@ export const PostFeed = () => {
 };
 
 export const InjectablePostFeed = ({
-	useGetAllPosts = useGetAllPostsDefault
+	useGetAllPosts = useGetAllPostsDefault,
+	PostCard = PostCardDefault
 }: Props) => {
 	const { updatePagination, extractPage, componentProps } =
 		usePagination<Post>(10);

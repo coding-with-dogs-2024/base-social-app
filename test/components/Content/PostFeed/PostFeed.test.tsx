@@ -3,6 +3,7 @@ import { InjectablePostFeed } from '../../../../src/components/Content/PostFeed'
 import type { MockedFunction } from 'vitest';
 import { useGetAllPosts } from '../../../../src/services/jsonapi/api';
 import type { PostList } from '../../../../src/services/jsonapi/types';
+import { PostCard, PostCardProps } from '../../../../src/components/PostCard';
 
 const useGetAllPostsMock: MockedFunction<typeof useGetAllPosts> = vi.fn();
 
@@ -20,6 +21,10 @@ const posts: PostList = [
 		body: 'This is the second post'
 	}
 ];
+
+const MockPostCard: typeof PostCard = (props: PostCardProps) => (
+	<div data-testid="post-card">Post ID: {props.post.id}</div>
+);
 
 describe('PostFeed', () => {
 	beforeEach(() => {
@@ -40,6 +45,7 @@ describe('PostFeed', () => {
 		expect(screen.getByRole('progressbar')).toBeVisible();
 
 		expect(screen.queryAllByTestId('post-card')).toHaveLength(0);
+		expect(screen.queryByTestId('pagination')).not.toBeInTheDocument();
 	});
 
 	it('shows post list from data', () => {
@@ -48,7 +54,12 @@ describe('PostFeed', () => {
 			data: posts
 		});
 		// In lesson, add the query client and show another error
-		render(<InjectablePostFeed useGetAllPosts={useGetAllPostsMock} />);
+		render(
+			<InjectablePostFeed
+				useGetAllPosts={useGetAllPostsMock}
+				PostCard={MockPostCard}
+			/>
+		);
 
 		expect(
 			screen.getByRole('heading', {
@@ -56,5 +67,10 @@ describe('PostFeed', () => {
 			})
 		).toBeVisible();
 		expect(screen.queryByRole('progressbar')).not.toBeInTheDocument();
+		expect(screen.getByTestId('pagination')).toBeVisible();
+		const postCards = screen.getAllByTestId('post-card');
+		expect(postCards).toHaveLength(2);
+		expect(postCards[0]).toHaveTextContent('Post ID: 1');
+		expect(postCards[1]).toHaveTextContent('Post ID: 2');
 	});
 });

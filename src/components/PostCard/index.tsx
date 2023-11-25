@@ -8,11 +8,11 @@ import { useImmer } from 'use-immer';
 import { Button } from '../UI/Button';
 import { PostComments } from './PostComments';
 
-type Props = Readonly<{
+export type PostCardProps = Readonly<{
 	post: Post;
 }>;
 
-const PostTitle = (props: Props) => {
+const PostTitle = (props: PostCardProps) => {
 	const { isLoading, data } = useGetUserById(props.post.userId);
 	return (
 		<div className={classes.postTitle}>
@@ -33,7 +33,7 @@ type PostBodyState = Readonly<{
 	showComments: boolean;
 }>;
 
-const PostBody = (props: Props) => {
+const PostBody = (props: PostCardProps) => {
 	const [state, setState] = useImmer<PostBodyState>({
 		showComments: false
 	});
@@ -58,7 +58,7 @@ const PostBody = (props: Props) => {
 	);
 };
 
-export const PostCard = (props: Props) => (
+export const PostCard = (props: PostCardProps) => (
 	<Card
 		data-testid="post-card"
 		title={<PostTitle post={props.post} />}
