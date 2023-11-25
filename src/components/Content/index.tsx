@@ -1,5 +1,7 @@
+import { PostFeed } from './PostFeed';
+
 export const Content = () => (
 	<main>
-		<h1>Hello World</h1>
+		<PostFeed />
 	</main>
 );

@@ -4,6 +4,11 @@ import path from 'path';
 
 export default defineConfig({
 	root: path.join(process.cwd(), 'src'),
+	css: {
+		modules: {
+			localsConvention: 'camelCase'
+		}
+	},
 	server: {
 		port: 3000
 	},
