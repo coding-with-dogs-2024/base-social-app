@@ -55,8 +55,9 @@ describe('Pagination', () => {
 
 		const button = queryForPreviousButton();
 		expect(button).not.toBeNull();
-		await userEvent.click(button!);
+		if (!button) throw new Error();
 
+		await userEvent.click(button);
 		expect(previousPage).toHaveBeenCalledOnce();
 	});
 
@@ -66,10 +67,10 @@ describe('Pagination', () => {
 			showNextPage: true
 		});
 
-		const button = screen.getByRole('button');
-		expect(button).toHaveTextContent('Next');
-		await userEvent.click(button);
+		const button = queryForNextButton();
+		if (!button) throw new Error();
 
+		await userEvent.click(button);
 		expect(nextPage).toHaveBeenCalledOnce();
 	});
 
@@ -79,16 +80,17 @@ describe('Pagination', () => {
 			showNextPage: true
 		});
 
-		const previousButton = screen.getByRole('button', {
-			name: 'Previous'
-		});
-		await userEvent.click(previousButton);
-		expect(previousButton).toHaveBeenCalledOnce();
+		const previousButton = queryForPreviousButton();
+		const nextButton = queryForNextButton();
 
-		const nextButton = screen.getByRole('button', {
-			name: 'Next'
-		});
+		expect(previousButton).not.toBeNull();
+		expect(nextButton).not.toBeNull();
+		if (!previousButton || !nextButton) throw new Error();
+
+		await userEvent.click(previousButton);
+		expect(previousPage).toHaveBeenCalledOnce();
+
 		await userEvent.click(nextButton);
-		expect(nextButton).toHaveBeenCalledOnce();
+		expect(nextPage).toHaveBeenCalledOnce();
 	});
 });
