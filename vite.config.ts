@@ -7,6 +7,7 @@ import path from 'path';
 export default defineConfig({
 	root: path.join(process.cwd(), 'src'),
 	test: {
+		globals: true,
 		root: path.join(process.cwd(), 'test'),
 		environment: 'jsdom',
 		setupFiles: [path.join(process.cwd(), 'test', 'setup.ts')]
