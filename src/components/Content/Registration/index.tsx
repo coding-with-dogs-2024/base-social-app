@@ -3,7 +3,6 @@ import { Input } from '../../UI/Form/Input';
 import { Radio } from '../../UI/Form/Radio';
 import type { RadioOption } from '../../UI/Form/Radio';
 import { Checkbox } from '../../UI/Form/Checkbox';
-import { useState } from 'react';
 import { useImmer } from 'use-immer';
 
 const GENDER_OPTIONS: ReadonlyArray<RadioOption> = [

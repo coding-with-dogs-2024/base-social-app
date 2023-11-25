@@ -1,10 +1,13 @@
 import classes from './Input.module.scss';
 import { useId } from 'react';
+import type { ChangeEvent } from 'react';
 
 type Props = Readonly<{
 	labelText?: string;
 	name?: string;
 	type?: 'text' | 'date' | 'password' | 'number';
+	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+	value: string | number;
 }>;
 
 export const Input = (props: Props) => {
@@ -16,7 +19,11 @@ export const Input = (props: Props) => {
 					{props.labelText}
 				</label>
 			)}
-			<input id={id} className={classes.input} {...props} />
+			<input
+				id={id}
+				className={classes.input}
+				{...props}
+			/>
 		</div>
 	);
 };
