@@ -99,7 +99,6 @@ export const Registration = () => {
 	return (
 		<div className={classes.registration}>
 			<h1>Registration</h1>
-			{JSON.stringify(state)}
 			<section>
 				<h2>Credentials</h2>
 				<div className={classes.row}>
