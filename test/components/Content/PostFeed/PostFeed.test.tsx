@@ -3,7 +3,8 @@ import { InjectablePostFeed } from '../../../../src/components/Content/PostFeed'
 import type { MockedFunction } from 'vitest';
 import { useGetAllPosts } from '../../../../src/services/jsonapi/api';
 import type { PostList } from '../../../../src/services/jsonapi/types';
-import { PostCard, PostCardProps } from '../../../../src/components/PostCard';
+import type { PostCardProps } from '../../../../src/components/PostCard';
+import { PostCard } from '../../../../src/components/PostCard';
 
 const useGetAllPostsMock: MockedFunction<typeof useGetAllPosts> = vi.fn();
 
