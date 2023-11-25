@@ -38,7 +38,7 @@ module.exports = {
 			files: ['**/*.{ts,tsx,mts,cts}'],
 			parser: '@typescript-eslint/parser',
 			extends: [
-				'plugin:@typescript-eslint/recommended',
+				'plugin:@typescript-eslint/strict',
 				'plugin:import/typescript'
 			],
 			settings: {
