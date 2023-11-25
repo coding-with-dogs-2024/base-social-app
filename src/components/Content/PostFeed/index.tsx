@@ -1,8 +1,5 @@
 import classes from './PostFeed.module.scss';
-import {
-	useGetAllPosts,
-	useGetAllPosts as useGetAllPostsDefault
-} from '../../../services/jsonapi/api';
+import { useGetAllPosts as useGetAllPostsDefault } from '../../../services/jsonapi/api';
 import { CircleSpinner } from '../../UI/Spinner/Circle';
 import { PostCard } from '../../PostCard';
 import { useEffect, useMemo } from 'react';
@@ -17,7 +14,7 @@ type Props = Readonly<{
 export const PostFeed = () => {
 	const { updatePagination, extractPage, componentProps } =
 		usePagination<Post>(10);
-	const { isLoading, data } = useGetAllPosts();
+	const { isLoading, data } = useGetAllPostsDefault();
 
 	useEffect(() => {
 		if (data) {

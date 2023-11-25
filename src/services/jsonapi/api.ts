@@ -25,7 +25,10 @@ const reOrderPosts = (posts: PostList): PostList => {
 	return group1.concat(group2).concat(group3);
 };
 
-export const useGetAllPosts = (): UseQueryResult<ReadonlyArray<Post>> =>
+export const useGetAllPosts = (): Pick<
+	UseQueryResult<ReadonlyArray<Post>>,
+	'isLoading' | 'data'
+> =>
 	useQuery<PostList>({
 		queryKey: [GET_ALL_POSTS],
 		queryFn: ({ signal }) =>
