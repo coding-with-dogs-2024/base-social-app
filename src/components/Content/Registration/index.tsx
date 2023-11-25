@@ -3,6 +3,8 @@ import { Input } from '../../UI/Form/Input';
 import { Radio } from '../../UI/Form/Radio';
 import type { RadioOption } from '../../UI/Form/Radio';
 import { Checkbox } from '../../UI/Form/Checkbox';
+import { useState } from 'react';
+import { useImmer } from 'use-immer';
 
 const GENDER_OPTIONS: ReadonlyArray<RadioOption> = [
 	{ value: 'male', label: 'Male' },
@@ -21,6 +23,26 @@ type State = Readonly<{
 	dailyPostLimit: number;
 }>;
 
+type UseRegistrationFormReturn = Readonly<{
+	state: State;
+}>;
+
+const useRegistrationForm = (): UseRegistrationFormReturn => {
+	const [state, setState] = useImmer<State>({
+		firstName: '',
+		lastName: '',
+		dailyPostLimit: 0,
+		dateOfBirth: '',
+		email: '',
+		gender: 'male',
+		notifications: true,
+		password: ''
+	});
+	return {
+		state
+	};
+};
+
 export const Registration = () => {
 	return (
 		<div className={classes.registration}>
@@ -29,13 +51,21 @@ export const Registration = () => {
 				<h2>Credentials</h2>
 				<div className={classes.row}>
 					<Input type="text" name="email" labelText="Email" />
-					<Input type="password" name="password" labelText="Password" />
+					<Input
+						type="password"
+						name="password"
+						labelText="Password"
+					/>
 				</div>
 			</section>
 			<section>
 				<h2>Personal Information</h2>
 				<div className={classes.row}>
-					<Input type="text" name="firstName" labelText="First Name" />
+					<Input
+						type="text"
+						name="firstName"
+						labelText="First Name"
+					/>
 					<Input type="text" name="lastName" labelText="Last Name" />
 				</div>
 				<div className={classes.row}>
@@ -67,4 +97,4 @@ export const Registration = () => {
 			</section>
 		</div>
 	);
-}
+};
