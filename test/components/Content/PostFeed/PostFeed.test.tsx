@@ -47,6 +47,7 @@ describe('PostFeed', () => {
 			isLoading: false,
 			data: posts
 		});
+		// In lesson, add the query client and show another error
 		render(<InjectablePostFeed useGetAllPosts={useGetAllPostsMock} />);
 
 		expect(
