@@ -10,17 +10,19 @@ export const Checkbox = (props: Props) => {
 	const id = useId();
 	return (
 		<div className={classes.checkboxWrapper}>
-			{props.labelText && (
-				<label className={classes.label} htmlFor={id}>
-					{props.labelText}
-				</label>
-			)}
-			<input
-				className={classes.checkbox}
-				type="checkbox"
-				name={props.name}
-				id={id}
-			/>
+			<div className={classes.innerWrapper}>
+				{props.labelText && (
+					<label className={classes.label} htmlFor={id}>
+						{props.labelText}
+					</label>
+				)}
+				<input
+					className={classes.checkbox}
+					type="checkbox"
+					name={props.name}
+					id={id}
+				/>
+			</div>
 		</div>
 	);
 };
