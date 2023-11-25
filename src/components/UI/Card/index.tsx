@@ -6,6 +6,7 @@ type Props = Readonly<{
 	title: ReactNode;
 	body: ReactNode;
 	className?: string;
+	'data-testid'?: string;
 }>;
 
 const boundClassNames = classNames.bind(classes);
@@ -16,7 +17,7 @@ export const Card = (props: Props) => {
 		[props.className ?? '']: true
 	});
 	return (
-		<div className={rootClasses}>
+		<div data-testid={props['data-testid']} className={rootClasses}>
 			{props.title}
 			<span className={classes.divider} />
 			{props.body}

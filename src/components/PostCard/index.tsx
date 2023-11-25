@@ -60,6 +60,7 @@ const PostBody = (props: Props) => {
 
 export const PostCard = (props: Props) => (
 	<Card
+		data-testid="post-card"
 		title={<PostTitle post={props.post} />}
 		body={<PostBody post={props.post} />}
 	/>
