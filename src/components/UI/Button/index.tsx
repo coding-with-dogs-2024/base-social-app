@@ -3,7 +3,7 @@ import classes from './Button.module.scss';
 import classnames from 'classnames/bind';
 
 type ButtonColor = 'primary' | 'secondary' | 'default';
-type ButtonSize = 'small' | 'default';
+type ButtonSize = 'small' | 'large' | 'default';
 
 type Props = Readonly<{
 	onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
