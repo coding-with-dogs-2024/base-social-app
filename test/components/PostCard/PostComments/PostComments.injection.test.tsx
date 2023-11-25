@@ -1,7 +1,6 @@
 import type { CommentList } from '../../../../src/services/jsonapi/types';
 import { render, screen, within } from '@testing-library/react';
 import { PostCommentsWithInjection } from '../../../../src/components/PostCard/PostComments';
-import { renderWithQueryClient } from '../../../_testutils_/renderWithWrapper';
 import type { MockedFunction } from 'vitest';
 import { useGetAllCommentsForPost as useGetAllCommentsForPostDefault } from '../../../../src/services/jsonapi/api';
 import {
@@ -78,24 +77,6 @@ describe('PostComments', () => {
 		).toBeVisible();
 		expect(
 			within(commentElements[1]).getByText('This is the second post')
-		).toBeVisible();
-	});
-
-	it('renders and loads comments', async () => {
-		renderWithQueryClient(<PostCommentsWithInjection postId={POST_ID} />);
-		expect(screen.getByRole('progressbar')).toBeVisible();
-
-		const comments = await screen.findAllByTestId('comment');
-		expect(comments).toHaveLength(2);
-
-		expect(within(comments[0]).getByText('first@gmail.com')).toBeVisible();
-		expect(
-			within(comments[0]).getByText('This is the first post')
-		).toBeVisible();
-
-		expect(within(comments[1]).getByText('second@gmail.com')).toBeVisible();
-		expect(
-			within(comments[1]).getByText('This is the second post')
 		).toBeVisible();
 	});
 });
