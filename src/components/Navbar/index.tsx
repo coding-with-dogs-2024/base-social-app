@@ -6,5 +6,8 @@ export const Navbar = () => (
 		<h1 className={classes.title}>
 			<Link to="/">My Social App</Link>
 		</h1>
+		<Link to="/register" style={{ color: 'white' }}>
+			Register
+		</Link>
 	</header>
 );
