@@ -2,7 +2,7 @@
 @import "../../../assets/styles/variables";
 @import "../../../assets/styles/common";
 
-@function hover-darken($color) {
+@function color-darken($color) {
   @return color.adjust($color, $lightness: -10%);
 }
 
@@ -11,30 +11,32 @@
   cursor: pointer;
 
   @include border-radius;
-  @include box-shadow;
 
   &.primary {
     background-color: $color-primary;
+    color: $text-when-bg-color-primary;
+    border: 2px outset color-darken($color-primary);
 
     &:hover {
-      background-color: hover-darken($color-primary);
+      background-color: color-darken($color-primary);
     }
   }
 
   &.secondary {
     background-color: $color-secondary;
+    border: 2px outset color-darken($color-secondary);
 
     &:hover {
-      background-color: hover-darken($color-secondary);
+      background-color: color-darken($color-secondary);
     }
   }
 
   &.default {
     background-color: white;
-    border: 1px lightgray solid;
+    border: 2px outset color-darken(white);
 
     &:hover {
-      background-color: hover-darken(white);
+      background-color: color-darken(white);
     }
   }
 }
