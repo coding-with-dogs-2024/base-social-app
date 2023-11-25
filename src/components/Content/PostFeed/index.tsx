@@ -7,11 +7,9 @@ import { usePagination } from '../../UI/Pagination/usePagination';
 import type { Post } from '../../../services/jsonapi/types';
 import { Pagination } from '../../UI/Pagination';
 
-const PAGE_SIZE = 10;
-
 export const PostFeed = () => {
 	const { updatePagination, extractPage, componentProps } =
-		usePagination<Post>(PAGE_SIZE);
+		usePagination<Post>(10);
 	const { isLoading, data } = useGetAllPosts();
 
 	useEffect(() => {
