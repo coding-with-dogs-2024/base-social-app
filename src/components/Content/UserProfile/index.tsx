@@ -21,16 +21,16 @@ const useGetUserId = (): number => {
 
 export const UserProfile = () => {
 	const userId = useGetUserId();
-	const { isLoading, data } = useGetUserById(userId);
+	const { isLoading, data: userData } = useGetUserById(userId);
 	return (
 		<div className={classes.userProfile}>
 			<div className={classes.profileTitle}>
 				<h1>User Profile</h1>
-				{data && <h2>{data.name}</h2>}
+				{userData && <h2>{userData.name}</h2>}
 			</div>
 			{isLoading && <CircleSpinner />}
 			<div className={classes.profileContent}>
-				{data && <UserInfo user={data} />}
+				{userData && <UserInfo user={userData} />}
 			</div>
 		</div>
 	);
