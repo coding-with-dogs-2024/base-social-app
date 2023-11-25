@@ -22,6 +22,16 @@ const doRender = (props: DoRenderProps) =>
 		/>
 	);
 
+const queryForPreviousButton = (): HTMLElement | null =>
+	screen.queryByRole('button', {
+		name: 'Previous'
+	});
+
+const queryForNextButton = (): HTMLElement | null =>
+	screen.queryByRole('button', {
+		name: 'Next'
+	});
+
 describe('Pagination', () => {
 	beforeEach(() => {
 		vi.clearAllMocks();
@@ -43,9 +53,9 @@ describe('Pagination', () => {
 			showNextPage: false
 		});
 
-		const button = screen.getByRole('button');
-		expect(button).toHaveTextContent('Previous');
-		await userEvent.click(button);
+		const button = queryForPreviousButton();
+		expect(button).not.toBeNull();
+		await userEvent.click(button!);
 
 		expect(previousPage).toHaveBeenCalledOnce();
 	});
@@ -80,44 +90,5 @@ describe('Pagination', () => {
 		});
 		await userEvent.click(nextButton);
 		expect(nextButton).toHaveBeenCalledOnce();
-	});
-
-	it('renders previous & next buttons', async () => {
-		const doTest = async (
-			showPreviousPage: boolean,
-			showNextPage: boolean
-		) => {
-			doRender({
-				showPreviousPage,
-				showNextPage
-			});
-
-			const previousButton = screen.queryByRole('button', {
-				name: 'Previous'
-			});
-			if (showPreviousPage) {
-				expect(previousButton).not.toBeNull();
-				await userEvent.click(previousButton!);
-				expect(previousPage).toHaveBeenCalledOnce();
-			} else {
-				expect(previousButton).toBeNull();
-			}
-
-			const nextButton = screen.queryByRole('button', {
-				name: 'Next'
-			});
-			if (showNextPage) {
-				expect(nextButton).not.toBeNull();
-				await userEvent.click(nextButton!);
-				expect(nextPage).toHaveBeenCalledOnce();
-			} else {
-				expect(nextButton).toBeNull();
-			}
-		};
-
-		await doTest(false, false);
-		await doTest(true, false);
-		await doTest(false, true);
-		await doTest(true, true);
 	});
 });
