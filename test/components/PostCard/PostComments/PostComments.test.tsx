@@ -2,9 +2,9 @@ import { http, HttpHandler, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import { HOST } from '../../../../src/services/jsonapi/api';
 import type { CommentList } from '../../../../src/services/jsonapi/types';
-import { render } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { PostComments } from '../../../../src/components/PostCard/PostComments';
-import {renderWithQueryClient} from '../../../_testutils_/renderWithWrapper';
+import { renderWithQueryClient } from '../../../_testutils_/renderWithWrapper';
 
 const POST_ID: number = 1;
 
@@ -48,7 +48,14 @@ describe('PostComments', () => {
 	afterAll(() => {
 		server.close();
 	});
-	it('renders and loads comments', () => {
+	it('renders and loads comments', async () => {
 		renderWithQueryClient(<PostComments postId={POST_ID} />);
+		const progressbar = await screen.findByRole('progressbar');
+		expect(progressbar).toBeVisible();
+
+		const firstComment = await screen.findByText('First Comment');
+		expect(firstComment).toBeVisible();
+		const secondComment = screen.getByText('Second Comment');
+		expect(secondComment).toBeVisible();
 	});
 });
