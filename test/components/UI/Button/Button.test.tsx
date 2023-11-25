@@ -34,5 +34,9 @@ describe('Button', () => {
 				</Button>
 			</div>
 		);
+		const defaultButton = screen.getByRole('button', {
+			name: 'Default Button'
+		});
+		expect(defaultButton).toHaveClass('_button_d2dd1d');
 	});
 });
