@@ -51,8 +51,10 @@ export const usePagination = <T>(pageSize: number): UsePaginationReturn<T> => {
 	);
 
 	const extractPage = useCallback(
-		(items: ReadonlyArray<T>) =>
-			items.slice(state.currentPage * pageSize, pageSize),
+		(items: ReadonlyArray<T>) => {
+			const start = state.currentPage * pageSize;
+			return items.slice(start, start + pageSize);
+		},
 		[state, pageSize]
 	);
 
