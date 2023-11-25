@@ -10,7 +10,9 @@
   font-weight: bold;
 }
 
-@mixin input-border {
+@mixin input-common {
   border: 1px solid lightgray;
   border-radius: 0.25rem;
+  font-size: 1rem;
+  padding: 0.25rem;
 }

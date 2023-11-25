@@ -6,4 +6,10 @@
   .label {
     @include label;
   }
+
+  .select {
+    @include input-common;
+
+    margin: 0;
+  }
 }

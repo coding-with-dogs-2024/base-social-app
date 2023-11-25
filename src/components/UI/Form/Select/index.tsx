@@ -20,7 +20,12 @@ export const Select = <Value extends string>(props: Props<Value>) => {
 					{props.labelText}
 				</label>
 			)}
-			<select id={id} name={props.name} onChange={props.onChange}>
+			<select
+				className={classes.select}
+				id={id}
+				name={props.name}
+				onChange={props.onChange}
+			>
 				{props.options.map((theOption) => (
 					<option key={theOption.value} value={theOption.value}>
 						{theOption.label}
