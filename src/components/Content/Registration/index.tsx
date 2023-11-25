@@ -1,5 +1,7 @@
 import classes from './Registration.module.scss';
 import { Input } from '../../UI/Input';
+import { Radio } from '../../UI/Radio';
+import type { RadioOption } from '../../UI/Radio';
 
 /*
  * First Name
@@ -11,6 +13,12 @@ import { Input } from '../../UI/Input';
  * Receive Notifications? (Checkbox)
  * Daily Post Limit (number)
  */
+
+const GENDER_OPTIONS: ReadonlyArray<RadioOption> = [
+	{ value: 'male', label: 'Male' },
+	{ value: 'female', label: 'Female' },
+	{ value: 'other', label: 'Other' }
+];
 
 export const Registration = () => (
 	<div className={classes.registration}>
@@ -33,6 +41,11 @@ export const Registration = () => (
 					type="date"
 					name="dateOfBirth"
 					labelText="Date of Birth"
+				/>
+				<Radio
+					labelText="Gender"
+					name="gender"
+					options={GENDER_OPTIONS}
 				/>
 			</div>
 		</section>
