@@ -3,6 +3,7 @@ import { useGetAllPosts } from '../../../services/jsonapi/api';
 import { Spinner } from '../../UI/Spinner';
 import { PostCard } from './PostCard';
 import { useImmer } from 'use-immer';
+import type { PostList } from '../../../services/jsonapi/types';
 
 type PaginationState = Readonly<{
 	currentPage: number;
@@ -15,6 +16,7 @@ type UsePaginationReturn = Readonly<{
 	showNextPage: boolean;
 	previousPage: () => void;
 	nextPage: () => void;
+	updatePagination: (posts: PostList) => void;
 }>;
 
 const previousPageAllowed = (state: PaginationState): boolean =>
@@ -22,7 +24,7 @@ const previousPageAllowed = (state: PaginationState): boolean =>
 const nextPageAllowed = (state: PaginationState): boolean =>
 	state.currentPage < state.totalPages - 1;
 
-const usePagination = (): UsePaginationReturn => {
+const usePagination = (pageSize: number): UsePaginationReturn => {
 	const [state, setState] = useImmer<PaginationState>({
 		currentPage: 0,
 		totalPages: 0
@@ -41,17 +43,26 @@ const usePagination = (): UsePaginationReturn => {
 			}
 		});
 
+	const updatePagination = (posts: PostList) =>
+		setState((draft) => {
+			draft.currentPage = 0;
+			const remainder = posts.length % pageSize;
+			draft.totalPages =
+				Math.floor(posts.length / pageSize) + (remainder > 0 ? 1 : 0);
+		});
+
 	return {
 		paginationState: state,
 		showPreviousPage: state.currentPage !== 0,
 		showNextPage: state.currentPage < state.totalPages - 1,
 		previousPage,
-		nextPage
+		nextPage,
+		updatePagination
 	};
 };
 
 export const PostFeed = () => {
-	usePagination();
+	usePagination(10);
 	const { isLoading, data } = useGetAllPosts();
 	return (
 		<div className={classes.postFeed}>
