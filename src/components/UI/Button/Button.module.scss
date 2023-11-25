@@ -1,3 +1,23 @@
+@import "../../../assets/styles/variables";
+@import "../../../assets/styles/common";
+
 .button {
   all: unset;
+  padding: 1rem;
+
+  @include border-radius;
+  @include box-shadow;
+
+  &.primary {
+    background-color: $color-primary;
+  }
+
+  &.secondary {
+    background-color: $color-secondary;
+  }
+
+  &.default {
+    background-color: white;
+    border: 1px lightgray solid;
+  }
 }
