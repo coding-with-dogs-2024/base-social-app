@@ -57,5 +57,21 @@ describe('Registration', () => {
 		expect(genderMaleInput).not.toBeChecked();
 		expect(genderFemaleInput).not.toBeChecked();
 		expect(genderOtherInput).toBeChecked();
+
+		const notificationInput = screen.getByLabelText(
+			'Receive Notifications?'
+		);
+		expect(notificationInput).toBeChecked();
+		await userEvent.click(notificationInput);
+		expect(notificationInput).not.toBeChecked();
+
+		const dailyPostInput = screen.getByLabelText('Daily Post Limit');
+		await userEvent.type(dailyPostInput, '20');
+		expect(dailyPostInput).toHaveValue(20);
+
+		const userTypeSelect = screen.getByLabelText('User Type');
+		expect(userTypeSelect).toHaveValue('standard');
+		await userEvent.selectOptions(userTypeSelect, 'admin');
+		expect(userTypeSelect).toHaveValue('admin');
 	});
 });
