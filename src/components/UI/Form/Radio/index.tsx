@@ -1,23 +1,26 @@
 import classes from './Radio.module.scss';
+import type { ChangeEvent } from 'react';
 import { useId } from 'react';
 
-export type RadioOption = Readonly<{
-	value: string;
+export type RadioOption<Value extends string> = Readonly<{
+	value: Value;
 	label: string;
 }>;
 
-type RadioProps = Readonly<{
+type RadioProps<Value extends string> = Readonly<{
 	labelText?: string;
 	name: string;
-	options: ReadonlyArray<RadioOption>;
+	options: ReadonlyArray<RadioOption<Value>>;
+	selected?: Value;
+	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }>;
 
-type RadioOptionProps = Readonly<{
-	option: RadioOption;
+type RadioOptionProps<Value extends string> = Readonly<{
+	option: RadioOption<Value>;
 	name: string;
 }>;
 
-const RadioOption = (props: RadioOptionProps) => {
+const RadioOption = <Value extends string>(props: RadioOptionProps<Value>) => {
 	const id = useId();
 	return (
 		<div>
@@ -32,7 +35,7 @@ const RadioOption = (props: RadioOptionProps) => {
 	);
 };
 
-export const Radio = (props: RadioProps) => {
+export const Radio = <Value extends string>(props: RadioProps<Value>) => {
 	return (
 		<div className={classes.radioWrapper}>
 			{props.labelText && (

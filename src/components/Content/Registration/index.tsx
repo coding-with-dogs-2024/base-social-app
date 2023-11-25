@@ -6,7 +6,9 @@ import { Checkbox } from '../../UI/Form/Checkbox';
 import { useImmer } from 'use-immer';
 import type { ChangeEvent } from 'react';
 
-const GENDER_OPTIONS: ReadonlyArray<RadioOption> = [
+type Gender = 'male' | 'female' | 'other';
+
+const GENDER_OPTIONS: ReadonlyArray<RadioOption<Gender>> = [
 	{ value: 'male', label: 'Male' },
 	{ value: 'female', label: 'Female' },
 	{ value: 'other', label: 'Other' }
@@ -18,7 +20,7 @@ type State = Readonly<{
 	email: string;
 	password: string;
 	dateOfBirth: string;
-	gender: 'male' | 'female' | 'other';
+	gender: Gender;
 	notifications: boolean;
 	dailyPostLimit: number;
 }>;
@@ -53,6 +55,7 @@ const useRegistrationForm = (): UseRegistrationFormReturn => {
 					draft[name] = checked;
 					break;
 				case 'gender':
+					draft[name] = value as Gender;
 					break;
 				default:
 					draft[name] = value;
@@ -122,6 +125,8 @@ export const Registration = () => {
 						labelText="Gender"
 						name="gender"
 						options={GENDER_OPTIONS}
+						selected={state.gender}
+						onChange={onChange}
 					/>
 				</div>
 			</section>
