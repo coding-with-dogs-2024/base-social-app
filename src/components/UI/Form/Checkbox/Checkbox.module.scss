@@ -1,0 +1,9 @@
+@import "../form-common";
+
+.checkbox-wrapper {
+  @include wrapper;
+
+  .label {
+    @include label;
+  }
+}
