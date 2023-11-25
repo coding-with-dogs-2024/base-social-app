@@ -1,6 +1,13 @@
 .radio-wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   width: 100%;
   margin: 0.5rem;
+
+  .options {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+  }
 }

@@ -35,13 +35,16 @@ const RadioOption = (props: RadioOptionProps) => {
 export const Radio = (props: RadioProps) => {
 	return (
 		<div className={classes.radioWrapper}>
-			{props.options.map((option) => (
-				<RadioOption
-					key={option.value}
-					option={option}
-					name={props.name}
-				/>
-			))}
+			{props.labelText && <strong>{props.labelText}</strong>}
+			<div className={classes.options}>
+				{props.options.map((option) => (
+					<RadioOption
+						key={option.value}
+						option={option}
+						name={props.name}
+					/>
+				))}
+			</div>
 		</div>
 	);
 };
