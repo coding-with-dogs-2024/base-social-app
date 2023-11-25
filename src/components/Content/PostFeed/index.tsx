@@ -4,6 +4,7 @@ import { Spinner } from '../../UI/Spinner';
 import { PostCard } from './PostCard';
 import { useImmer } from 'use-immer';
 import type { PostList } from '../../../services/jsonapi/types';
+import { useCallback, useEffect } from 'react';
 
 type PaginationState = Readonly<{
 	currentPage: number;
@@ -30,26 +31,37 @@ const usePagination = (pageSize: number): UsePaginationReturn => {
 		totalPages: 0
 	});
 
-	const previousPage = () =>
-		setState((draft) => {
-			if (previousPageAllowed(draft)) {
-				draft.currentPage--;
-			}
-		});
-	const nextPage = () =>
-		setState((draft) => {
-			if (nextPageAllowed(draft)) {
-				draft.currentPage++;
-			}
-		});
+	const previousPage = useCallback(
+		() =>
+			setState((draft) => {
+				if (previousPageAllowed(draft)) {
+					draft.currentPage--;
+				}
+			}),
+		[setState]
+	);
 
-	const updatePagination = (posts: PostList) =>
-		setState((draft) => {
-			draft.currentPage = 0;
-			const remainder = posts.length % pageSize;
-			draft.totalPages =
-				Math.floor(posts.length / pageSize) + (remainder > 0 ? 1 : 0);
-		});
+	const nextPage = useCallback(
+		() =>
+			setState((draft) => {
+				if (nextPageAllowed(draft)) {
+					draft.currentPage++;
+				}
+			}),
+		[setState]
+	);
+
+	const updatePagination = useCallback(
+		(posts: PostList) =>
+			setState((draft) => {
+				draft.currentPage = 0;
+				const remainder = posts.length % pageSize;
+				draft.totalPages =
+					Math.floor(posts.length / pageSize) +
+					(remainder > 0 ? 1 : 0);
+			}),
+		[setState, pageSize]
+	);
 
 	return {
 		paginationState: state,
@@ -62,8 +74,15 @@ const usePagination = (pageSize: number): UsePaginationReturn => {
 };
 
 export const PostFeed = () => {
-	usePagination(10);
+	const { updatePagination } = usePagination(10);
 	const { isLoading, data } = useGetAllPosts();
+
+	useEffect(() => {
+		if (data) {
+			updatePagination(data);
+		}
+	}, [data, updatePagination]);
+
 	return (
 		<div className={classes.postFeed}>
 			<h1>Post Feed</h1>
