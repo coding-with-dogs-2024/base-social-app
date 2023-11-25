@@ -3,4 +3,19 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+
+  .profile-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      margin-top: 0.5rem;
+    }
+  }
 }
