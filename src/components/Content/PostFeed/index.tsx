@@ -4,11 +4,12 @@ import { Spinner } from '../../UI/Spinner';
 import { PostCard } from './PostCard';
 import { useEffect } from 'react';
 import { usePagination } from '../../common/usePagination';
+import type { Post } from '../../../services/jsonapi/types';
 
 const PAGE_SIZE = 10;
 
 export const PostFeed = () => {
-	const { updatePagination, extractPage } = usePagination(PAGE_SIZE);
+	const { updatePagination, extractPage } = usePagination<Post>(PAGE_SIZE);
 	const { isLoading, data } = useGetAllPosts();
 
 	useEffect(() => {
