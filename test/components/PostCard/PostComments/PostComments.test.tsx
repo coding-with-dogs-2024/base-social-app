@@ -2,7 +2,7 @@ import { http, HttpHandler, HttpResponse } from 'msw';
 import { setupServer } from 'msw/node';
 import { HOST } from '../../../../src/services/jsonapi/api';
 import type { CommentList } from '../../../../src/services/jsonapi/types';
-import { screen } from '@testing-library/react';
+import { screen, within } from '@testing-library/react';
 import { PostComments } from '../../../../src/components/PostCard/PostComments';
 import { renderWithQueryClient } from '../../../_testutils_/renderWithWrapper';
 
@@ -50,14 +50,19 @@ describe('PostComments', () => {
 	});
 	it('renders and loads comments', async () => {
 		renderWithQueryClient(<PostComments postId={POST_ID} />);
-		const progressbar = await screen.findByRole('progressbar');
-		expect(progressbar).toBeVisible();
+		expect(screen.getByRole('progressbar')).toBeVisible();
 
-		const firstComment = await screen.findByText('This is the first post');
-		expect(firstComment).toBeVisible();
-		expect(screen.getByText('first@gmail.com')).toBeVisible();
+		const comments = await screen.findAllByTestId('comment');
+		expect(comments).toHaveLength(2);
 
-		expect(screen.getByText('This is the second post')).toBeVisible();
-		expect(screen.getByText('second@gmail.com')).toBeVisible();
+		expect(within(comments[0]).getByText('first@gmail.com')).toBeVisible();
+		expect(
+			within(comments[0]).getByText('This is the first post')
+		).toBeVisible();
+
+		expect(within(comments[1]).getByText('second@gmail.com')).toBeVisible();
+		expect(
+			within(comments[1]).getByText('This is the second post')
+		).toBeVisible();
 	});
 });

@@ -12,7 +12,7 @@ type CommentProps = Readonly<{
 }>;
 
 const Comment = (props: CommentProps) => (
-	<div className={classes.comment}>
+	<div data-testid="comment" className={classes.comment}>
 		<div>
 			<strong>{props.comment.email}</strong>
 		</div>
