@@ -5,11 +5,13 @@ import { PostCard } from './PostCard';
 import { useEffect } from 'react';
 import { usePagination } from '../../UI/Pagination/usePagination';
 import type { Post } from '../../../services/jsonapi/types';
+import { Pagination } from '../../UI/Pagination';
 
 const PAGE_SIZE = 10;
 
 export const PostFeed = () => {
-	const { updatePagination, extractPage } = usePagination<Post>(PAGE_SIZE);
+	const { updatePagination, extractPage, componentProps } =
+		usePagination<Post>(PAGE_SIZE);
 	const { isLoading, data } = useGetAllPosts();
 
 	useEffect(() => {
@@ -27,6 +29,7 @@ export const PostFeed = () => {
 					extractPage(data).map((post) => (
 						<PostCard key={post.id} post={post} />
 					))}
+				<Pagination {...componentProps} />
 			</div>
 		</div>
 	);
