@@ -3,6 +3,7 @@ import { Card } from '../../../UI/Card';
 import classes from './PostCard.module.scss';
 import { useGetUserById } from '../../../../services/jsonapi/api';
 import { EllipsisSpinner } from '../../../UI/Spinner/Ellipsis';
+import { Link } from 'react-router-dom';
 
 type Props = Readonly<{
 	post: Post;
@@ -17,7 +18,9 @@ const PostTitle = (props: Props) => {
 			</div>
 			<div>
 				{isLoading && <EllipsisSpinner />}
-				{data && data.name}
+				<Link to={`/user/${props.post.userId}`}>
+					{data && data.name}
+				</Link>
 			</div>
 		</div>
 	);

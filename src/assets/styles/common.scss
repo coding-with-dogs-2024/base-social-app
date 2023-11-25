@@ -1,7 +1,35 @@
+@import "./variables";
+
 @mixin box-shadow {
   box-shadow: rgb(0 0 0 / 35%) 0 5px 15px;
 }
 
 @mixin border-radius {
   border-radius: 0.25rem;
+}
+
+@mixin link {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+@mixin link-bg-primary {
+  @include link;
+
+  background-color: $color-primary;
+  color: $text-when-bg-color-primary;
+}
+
+@mixin link-bg-secondary {
+  @include link;
+
+  background-color: $color-secondary;
+  color: black;
+}
+
+@mixin link-bg-default {
+  @include link;
+
+  background-color: white;
+  color: black;
 }

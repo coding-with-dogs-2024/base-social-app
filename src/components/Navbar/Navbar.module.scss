@@ -13,8 +13,7 @@
     margin: 0;
 
     a {
-      color: $text-when-bg-color-primary;
-      text-decoration: none;
+      @include link-bg-primary;
     }
   }
 }
