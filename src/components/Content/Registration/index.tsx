@@ -19,6 +19,7 @@ export const Registration = () => (
 			<h2>Credentials</h2>
 			<div className={classes.row}>
 				<Input type="text" name="email" labelText="Email" />
+				<Input type="password" name="password" labelText="Password" />
 			</div>
 		</section>
 	</div>

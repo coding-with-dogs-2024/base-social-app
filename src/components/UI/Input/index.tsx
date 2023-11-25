@@ -8,7 +8,9 @@ type Props = Readonly<InputHTMLAttributes<HTMLInputElement>> &
 
 export const Input = (props: Props) => (
 	<div className={classes.inputWrapper}>
-		{props.labelText && <label>{props.labelText}</label>}
-		<input {...props} />
+		{props.labelText && (
+			<label className={classes.label}>{props.labelText}</label>
+		)}
+		<input className={classes.input} {...props} />
 	</div>
 );
