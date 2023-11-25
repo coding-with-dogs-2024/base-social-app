@@ -4,6 +4,7 @@ import type { InputHTMLAttributes } from 'react';
 type Props = Readonly<InputHTMLAttributes<HTMLInputElement>> &
 	Readonly<{
 		labelText?: string;
+		type?: 'text' | 'date' | 'password' | 'number';
 	}>;
 
 export const Input = (props: Props) => (
