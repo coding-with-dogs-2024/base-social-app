@@ -4,7 +4,10 @@ import { PostCommentsWithInjection } from '../../../../src/components/PostCard/P
 import { renderWithQueryClient } from '../../../_testutils_/renderWithWrapper';
 import type { MockedFunction } from 'vitest';
 import { useGetAllCommentsForPost as useGetAllCommentsForPostDefault } from '../../../../src/services/jsonapi/api';
-import type { UseQueryResult } from '@tanstack/react-query';
+import {
+	createIsLoadingUseQueryResult,
+	createLoadedUseQueryResult
+} from '../../../_testutils_/reactQueryMocks';
 
 const POST_ID: number = 1;
 
@@ -28,66 +31,6 @@ const comments: CommentList = [
 const useGetAllCommentsForPost: MockedFunction<
 	typeof useGetAllCommentsForPostDefault
 > = vi.fn();
-
-// TODO should T extend object?
-
-const createLoadedUseQueryResult = <T extends object>(
-	data: T
-): UseQueryResult<T> => ({
-	data,
-	isLoadingError: false,
-	isLoading: false,
-	error: null,
-	isRefetchError: false,
-	fetchStatus: 'idle',
-	isSuccess: true,
-	status: 'success',
-	refetch: vi.fn(),
-	isRefetching: false,
-	isStale: false,
-	isPlaceholderData: false,
-	isFetchedAfterMount: false,
-	isFetching: false,
-	failureReason: null,
-	isError: false,
-	failureCount: 0,
-	errorUpdatedAt: 0,
-	dataUpdatedAt: 0,
-	isPending: false,
-	isPaused: false,
-	isFetched: true,
-	errorUpdateCount: 0,
-	isInitialLoading: false
-});
-
-const createIsLoadingUseQueryResult = <
-	T extends object
->(): UseQueryResult<T> => ({
-	isLoading: true,
-	data: undefined,
-	error: null,
-	isError: false,
-	isFetched: false,
-	isPaused: false,
-	isPending: true,
-	dataUpdatedAt: 0,
-	errorUpdateCount: 0,
-	errorUpdatedAt: 0,
-	failureCount: 0,
-	failureReason: null,
-	fetchStatus: 'fetching',
-	isFetching: true,
-	isLoadingError: false,
-	isFetchedAfterMount: false,
-	isPlaceholderData: false,
-	isStale: false,
-	isRefetching: false,
-	refetch: vi.fn(),
-	status: 'pending',
-	isSuccess: false,
-	isRefetchError: false,
-	isInitialLoading: false
-});
 
 describe('PostComments', () => {
 	beforeEach(() => {
