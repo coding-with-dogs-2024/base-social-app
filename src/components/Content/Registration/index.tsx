@@ -22,5 +22,19 @@ export const Registration = () => (
 				<Input type="password" name="password" labelText="Password" />
 			</div>
 		</section>
+		<section>
+			<h2>Personal Information</h2>
+			<div className={classes.row}>
+				<Input type="text" name="firstName" labelText="First Name" />
+				<Input type="text" name="lastName" labelText="Last Name" />
+			</div>
+			<div className={classes.row}>
+				<Input
+					type="date"
+					name="dateOfBirth"
+					labelText="Date of Birth"
+				/>
+			</div>
+		</section>
 	</div>
 );
