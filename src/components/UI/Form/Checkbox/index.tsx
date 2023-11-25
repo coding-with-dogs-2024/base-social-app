@@ -4,9 +4,9 @@ import { useId } from 'react';
 
 type Props = Readonly<{
 	labelText?: string;
-	name?: string;
-	checked?: boolean;
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+	name: string;
+	checked: boolean;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }>;
 
 export const Checkbox = (props: Props) => {

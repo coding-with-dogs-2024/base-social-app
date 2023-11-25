@@ -4,13 +4,13 @@ import type { ChangeEvent } from 'react';
 
 type Props = Readonly<{
 	labelText?: string;
-	name?: string;
+	name: string;
 	type?: 'text' | 'date' | 'password' | 'number';
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
-	value?: string | number;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	value: string | number;
 }>;
 
-export const Input = (props: Props) => {
+export const Input = ({ type = 'text', ...props }: Props) => {
 	const id = useId();
 	return (
 		<div className={classes.inputWrapper}>
@@ -25,7 +25,7 @@ export const Input = (props: Props) => {
 				name={props.name}
 				value={props.value}
 				onChange={props.onChange}
-				type={props.type}
+				type={type}
 			/>
 		</div>
 	);

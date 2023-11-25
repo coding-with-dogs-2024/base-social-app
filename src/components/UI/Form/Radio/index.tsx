@@ -11,15 +11,15 @@ type RadioProps<Value extends string> = Readonly<{
 	labelText?: string;
 	name: string;
 	options: ReadonlyArray<RadioOption<Value>>;
-	selected?: Value;
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+	selected: Value;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }>;
 
 type RadioOptionProps<Value extends string> = Readonly<{
 	option: RadioOption<Value>;
 	name: string;
-	selected?: Value;
-	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+	selected: Value;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }>;
 
 const RadioOption = <Value extends string>(props: RadioOptionProps<Value>) => {

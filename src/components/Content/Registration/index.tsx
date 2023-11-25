@@ -8,6 +8,8 @@ import type { ChangeEvent } from 'react';
 
 type Gender = 'male' | 'female' | 'other';
 
+// TODO need select box
+
 const GENDER_OPTIONS: ReadonlyArray<RadioOption<Gender>> = [
 	{ value: 'male', label: 'Male' },
 	{ value: 'female', label: 'Female' },
