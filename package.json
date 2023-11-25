@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "typeCheck": "typed-scss-modules src && tsc --noEmit",
+    "typeCheck": "typed-scss-modules src && tsc --noEmit --project ./test/tsconfig.json",
     "lint": "eslint --fix --max-warnings=0 'src/**/*.{ts,tsx,js,jsx}' && stylelint --fix --max-warnings=0 'src/**/*.{css,scss}'",
     "prepare": "husky install"
   },
