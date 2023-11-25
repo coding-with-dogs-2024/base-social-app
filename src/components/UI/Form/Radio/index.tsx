@@ -18,10 +18,13 @@ type RadioProps<Value extends string> = Readonly<{
 type RadioOptionProps<Value extends string> = Readonly<{
 	option: RadioOption<Value>;
 	name: string;
+	selected?: Value;
+	onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 }>;
 
 const RadioOption = <Value extends string>(props: RadioOptionProps<Value>) => {
 	const id = useId();
+	const selected = props.selected === props.option.value;
 	return (
 		<div>
 			<label htmlFor={id}>{props.option.label}</label>
@@ -30,6 +33,8 @@ const RadioOption = <Value extends string>(props: RadioOptionProps<Value>) => {
 				type="radio"
 				name={props.name}
 				value={props.option.value}
+				checked={selected}
+				onChange={props.onChange}
 			/>
 		</div>
 	);
@@ -47,6 +52,8 @@ export const Radio = <Value extends string>(props: RadioProps<Value>) => {
 						key={option.value}
 						option={option}
 						name={props.name}
+						selected={props.selected}
+						onChange={props.onChange}
 					/>
 				))}
 			</div>
