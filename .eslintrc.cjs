@@ -40,7 +40,7 @@ module.exports = {
 			files: ['**/*.{ts,tsx,mts,cts}'],
 			parser: '@typescript-eslint/parser',
 			parserOptions: {
-				project: path.join(process.cwd(), 'tsconfig.json')
+				project: path.join(process.cwd(), 'test', 'tsconfig.json')
 			},
 			extends: [
 				'plugin:@typescript-eslint/strict-type-checked',
