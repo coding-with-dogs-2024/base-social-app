@@ -13,5 +13,9 @@
     p {
       margin: 0.5rem;
     }
+
+    p:nth-child(2) {
+      text-align: right;
+    }
   }
 }
