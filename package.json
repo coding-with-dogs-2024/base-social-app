@@ -8,6 +8,7 @@
     "lint": "eslint --fix --max-warnings=0 'src/**/*.{ts,tsx,js,jsx}' && stylelint --fix --max-warnings=0 'src/**/*.{css,scss}'",
     "prepare": "husky install",
     "test": "vitest run",
+    "testUi": "vitest --ui",
     "validate": "npm run typeCheck && npm run lint && npm run test",
     "build": "vite build"
   },
@@ -23,6 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "@vitest/ui": "^0.34.6",
     "axios-mock-adapter": "^1.22.0",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
